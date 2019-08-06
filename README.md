@@ -1,1 +1,3 @@
-# MPay
+# README
+
+Database: postgresql
