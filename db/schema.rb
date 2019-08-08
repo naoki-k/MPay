@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_023038) do
+ActiveRecord::Schema.define(version: 2019_08_08_082306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "banks", force: :cascade do |t|
+    t.string "name", limit: 25, null: false
+    t.string "code", limit: 25, null: false
+  end
 
   create_table "billings", force: :cascade do |t|
     t.bigint "sender_id", null: false
@@ -37,11 +42,14 @@ ActiveRecord::Schema.define(version: 2019_08_08_023038) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "kind", limit: 25, null: false
+    t.integer "type", limit: 2, null: false
     t.string "number", limit: 255, null: false
     t.boolean "is_active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "bank_id"
+    t.index ["bank_id"], name: "index_payments_on_bank_id"
+    t.index ["type"], name: "index_payments_on_type"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -67,7 +75,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_023038) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "type", limit: 2, default: 0, null: false
+    t.integer "type", limit: 2, null: false
     t.string "tel", limit: 25, null: false
     t.string "name", limit: 25, null: false
     t.string "email", limit: 255
@@ -80,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_023038) do
   add_foreign_key "billings", "users", column: "receiver_id"
   add_foreign_key "billings", "users", column: "sender_id"
   add_foreign_key "corporate_informations", "users"
+  add_foreign_key "payments", "banks"
   add_foreign_key "payments", "users"
   add_foreign_key "relationships", "users", column: "followed_user_id"
   add_foreign_key "relationships", "users", column: "following_user_id"
