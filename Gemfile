@@ -12,15 +12,16 @@ gem "postgresql"
 gem "pg"
 gem "haml-rails"
 gem "bcrypt"
-gem 'bootsnap', require: false
-gem 'rails-i18n'
+gem "bootsnap", require: false
+gem "rails-i18n"
 
 group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
   gem "spring"
   gem "web-console", ">= 3.3.0"
-  gem 'faker',        '1.7.3'
+  gem "faker", "1.7.3"
   gem "listen"
+  gem "rails-erd"
 end
 
 group :test do
