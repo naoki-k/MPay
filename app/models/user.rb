@@ -19,21 +19,12 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :payments
 
-  enum type: {
-    admin:   'AdminUser',
-    personal: 'PersonalUser',
-    corporate: 'CorporateUser'
-  }
+  enum type: [:AdminUser,:PersonalUser, :CorporateUser]
 
   validates :tel, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :type, presence: true, length: { maximum: 25 }
   validates :name, length: { maximum: 25 }
   validates :email, length: { maximum: 255 }
-  validate :payable
-
-  def payable
-    errors.add(:payments, "取引可能講座がありません") if payments.tradable.size < 1
-  end
 
   private
 

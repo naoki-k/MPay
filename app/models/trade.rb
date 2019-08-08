@@ -3,6 +3,8 @@ class Trade < ApplicationRecord
   belongs_to :passive_payment, class_name: :Payment
   has_one :billing
 
+  enum kind: { common: 0, qr: 1 }
+
   validates :amount, presence: true
 
   def type
@@ -11,11 +13,11 @@ class Trade < ApplicationRecord
 
     if sender == receiver
       :charge
-    elsif sender.admin?
+    elsif sender.AdminUser?
       :from_mpay
-    elsif receiver.corporate?
+    elsif receiver.CorporateUser?
       :to_corporate
-    elsif receiver.personal?
+    elsif receiver.PersonalUser?
       :with_personal_user
     end
   end
