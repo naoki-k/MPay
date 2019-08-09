@@ -3,6 +3,7 @@ class Payment < ApplicationRecord
                            foreign_key: :active_payment_id
   has_many :passive_trades, class_name: :Trade,
                             foreign_key: :passive_payment_id
+  belongs_to :user
 
   enum type: [:BankPayment, :CreditPayment]
 

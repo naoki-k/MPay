@@ -1,6 +1,8 @@
 class Trade < ApplicationRecord
   belongs_to :active_payment, class_name: :Payment
   belongs_to :passive_payment, class_name: :Payment
+  has_one :sender, through: :active_payment, source: :user
+  has_one :receiver, through: :passive_payment, source: :user
   has_one :billing
 
   enum kind: { common: 0, qr: 1 }
@@ -8,9 +10,6 @@ class Trade < ApplicationRecord
   validates :amount, presence: true
 
   def type
-    sender = active_payment.user
-    receiver = passive_payment.user
-
     if sender == receiver
       :charge
     elsif sender.AdminUser?
