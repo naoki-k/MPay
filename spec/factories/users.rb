@@ -4,15 +4,15 @@ FactoryBot.define do
     sequence(:name) {|n| "user#{n}"}
   end
 
-  factory :admin_user, parent: :user do
+  factory :admin_user, parent: :user, class: "AdminUser" do
     type { "AdminUser" }
   end
 
-  factory :corporate_user, parent: :user do
+  factory :corporate_user, parent: :user, class: "CorporateUser" do
     type { "CorporateUser" }
   end
 
-  factory :personal_user, parent: :user do
+  factory :personal_user, parent: :user, class: "PersonalUser" do
     type { "PersonalUser" }
   end
 end

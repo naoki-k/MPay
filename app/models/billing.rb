@@ -5,4 +5,6 @@ class Billing < ApplicationRecord
 
   validates :amount, presence: true
   validates :content, length: { maximum: 65535 }
+  validates :sender, presence: true
+  validates :receiver, presence: true
 end
