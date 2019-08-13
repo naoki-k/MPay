@@ -30,7 +30,7 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 255 }
 
   def tradable?
-    credit_payment.is_active || bank_payment&.tradable.present?
+    credit_payment.is_active || bank_payments&.tradable.present?
   end
 
   def trades
