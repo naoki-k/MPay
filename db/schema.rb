@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_082306) do
     t.datetime "updated_at", null: false
     t.bigint "bank_id"
     t.index ["bank_id"], name: "index_payments_on_bank_id"
+    t.index ["number"], name: "index_payments_on_number", unique: true
     t.index ["type"], name: "index_payments_on_type"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end

@@ -6,6 +6,7 @@ class CreatePayments < ActiveRecord::Migration[5.2]
       t.string :number, limit: 255, null: false
       t.boolean :is_active, null: false, default: false
       t.index :type
+      t.index :number, unique: true
       t.timestamps null: false
     end
   end
