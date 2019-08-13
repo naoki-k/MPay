@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_validation :create_mpay_credit, on: :create
+
   has_many :payments
   has_one :credit_payment
   has_many :bank_payments
@@ -19,8 +21,6 @@ class User < ApplicationRecord
                               foreign_key: :receiver_id,
                               dependent: :destroy
 
-  accepts_nested_attributes_for :credit_payment
-
   enum type: [:AdminUser, :PersonalUser, :CorporateUser]
 
   validates :credit_payment, presence: true
@@ -36,4 +36,10 @@ class User < ApplicationRecord
   def trades
     (active_trades + passive_trades).uniq.sort_by(&:created_at)
   end
+
+  private
+
+    def create_mpay_credit
+      build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: true)
+    end
 end

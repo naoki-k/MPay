@@ -6,31 +6,16 @@ mizuho = Bank.create!({
 admin_user = AdminUser.create!({
   tel: "000-0000-0000",
   name: "admin_user",
-  credit_payment_attributes:
-    {
-      number: "000-0000-0000",
-      is_active: true
-    }
 })
 
 corporate_user = CorporateUser.create!({
   tel: "100-0000-0000",
   name: "corporate_user",
-  credit_payment_attributes:
-    {
-      number: "100-0000-0000",
-      is_active: true
-    }
 })
 
 personal_user_1 = PersonalUser.create!({
   tel: "000-0000-0001",
   name: "personal_user_1",
-  credit_payment_attributes:
-    {
-      number: "200-0000-0001",
-      is_active: true
-    }
 })
 
 personal_user_1.bank_payments.create!({
@@ -42,11 +27,6 @@ personal_user_1.bank_payments.create!({
 personal_user_2 = PersonalUser.create!({
   tel: "200-0000-0002",
   name: "personal_user_2",
-  credit_payment_attributes:
-    {
-      number: "300-0000-0001",
-      is_active: true
-    }
 })
 
 Trade.create!({
