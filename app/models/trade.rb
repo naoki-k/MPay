@@ -11,6 +11,8 @@ class Trade < ApplicationRecord
   enum kind: { common: 0, qr: 1 }
 
   validates :amount, presence: true
+  validates :active_payment, presence: true
+  validates :passive_payment, presence: true
 
   def type
     if sender == receiver

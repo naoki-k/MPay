@@ -11,16 +11,18 @@ class Payment < ApplicationRecord
 
   validates :number, presence: true, length: { maximum: 255 }
   validates :is_active, inclusion: { in: [true, false] }
-
-  def encrypt_number
-    self.number = encrypt(self.number)
-  end
+  validates :type, presence: true, length: { maximum: 25 }
+  validates :user, presence: true
 
   def decrypted_number
     decrypt(number)
   end
 
   private
+
+    def encrypt_number
+      self.number = encrypt(self.number)
+    end
 
     def encrypt(string)
       @crypt ||= ActiveSupport::MessageEncryptor.new(secret_key_base_32_bytes, cipher: "aes-256-cbc")
