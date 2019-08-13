@@ -1,5 +1,6 @@
 class Trade < ApplicationRecord
-  TYPE = { charge: "入金", from_mpay: "MPayからの支払い", to_corporate: "法人への支払い", with_personal_user: "ユーザー間取引" }
+  TYPE = { charge: "入金", from_mpay: "MPayからの支払い",
+           to_corporate: "法人への支払い", with_personal_user: "ユーザー間取引" }.freeze
 
   belongs_to :active_payment, class_name: :Payment
   belongs_to :passive_payment, class_name: :Payment
