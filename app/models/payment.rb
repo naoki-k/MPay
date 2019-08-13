@@ -16,6 +16,10 @@ class Payment < ApplicationRecord
     self.number = encrypt(self.number)
   end
 
+  def decrypted_number
+    decrypt(number)
+  end
+
   private
 
     def encrypt(string)
@@ -28,7 +32,7 @@ class Payment < ApplicationRecord
       @crypt.decrypt_and_verify(string)
     end
 
-    # TODO: このモデルのインスタンスが持つのはおかしい
+    # TODO: このインスタンスが持つのはおかしいかも
     def secret_key_base_32_bytes
       Rails.application.secrets[:secret_key_base].byteslice(0, 32)
     end
