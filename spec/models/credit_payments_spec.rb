@@ -6,8 +6,8 @@ RSpec.describe CreditPayment, type: :model do
     let(:other_user) { create(:personal_user) }
     let(:my_payment) { user.credit_payment}
     let(:other_payment) { other_user.credit_payment }
-    let(:increase_amount) { rand(5000 .. 10000) }
-    let(:decrease_amount) { rand(0 .. 5000) }
+    let(:increase_amount) { rand(5000..10000) }
+    let(:decrease_amount) { rand(0..5000) }
 
     before do
       create(:trade, active_payment: other_payment, passive_payment: my_payment, amount: increase_amount)

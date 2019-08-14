@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_082306) do
     t.integer "type", limit: 2, null: false
     t.string "tel", limit: 25, null: false
     t.string "name", limit: 25, null: false
+    t.string "password_digest", limit: 255, null: false
     t.string "email", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

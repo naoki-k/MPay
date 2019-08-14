@@ -20,6 +20,18 @@ RSpec.describe User, type: :model do
         it { expect(user).not_to be_valid }
       end
 
+      context "when password is blank" do
+        let(:user) { build(:user, password: "") }
+
+        it { expect(user).not_to be_valid }
+      end
+
+      context "when password is not confirmed" do
+        let(:user) { build(:user, :with_confirmation, password_confirmation: "invalid") }
+
+        it { expect(user).not_to be_valid }
+      end
+
       context "when credit payment is nothing" do
         let(:user) { build(:personal_user) }
         before do
@@ -38,6 +50,8 @@ RSpec.describe User, type: :model do
           expect(build(:personal_user, tel: "0" * 26)).not_to be_valid
           expect(build(:personal_user, name: "a" * 26)).not_to be_valid
           expect(build(:personal_user, email: "a" * 256 + "@example.com")).not_to be_valid
+          expect(build(:personal_user, password: "a" * 5)).not_to be_valid
+          expect(build(:personal_user, password: "a" * 31)).not_to be_valid
         end
       end
 

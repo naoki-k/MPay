@@ -28,6 +28,9 @@ class User < ApplicationRecord
   validates :type, presence: true, length: { maximum: 25 }
   validates :name, length: { maximum: 25 }
   validates :email, length: { maximum: 255 }
+  validates :password, presence: true, length: { in: 6..30 }
+
+  has_secure_password
 
   def tradable?
     credit_payment.is_active || bank_payments&.tradable.present?
