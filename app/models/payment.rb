@@ -10,15 +10,21 @@ class Payment < ApplicationRecord
   enum type: [:BankPayment, :CreditPayment]
 
   validates :number, presence: true, length: { maximum: 255 }
-  validates :is_active, inclusion: { in: [true, false] }
   validates :type, presence: true, length: { maximum: 25 }
   validates :user, presence: true
+  validate :only_one_credit_each_user, if: :CreditPayment?
 
   def decrypted_number
     decrypt(number)
   end
 
   private
+
+    def only_one_credit_each_user
+      if self.class.where(type: :CreditPayment, user: user).present?
+        errors.add(:user, "already have a credit")
+      end
+    end
 
     def encrypt_number
       self.number = encrypt(self.number)
