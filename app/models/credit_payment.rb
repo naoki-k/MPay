@@ -4,7 +4,7 @@ class CreditPayment < Payment
       passive_trades.sum(:amount) - active_trades.reject {|trade| trade.type == :charge }.pluck(:amount).sum
   end
 
-  def is_payable?(amount)
+  def payable?(amount)
     balance >= amount
   end
 end

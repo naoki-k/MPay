@@ -5,7 +5,7 @@ FactoryBot.define do
     association :user
   end
 
-  factory :credit_payment, parent: :payment do
+  factory :credit_payment, parent: :payment, class: "CreditPayment" do
     type { "CreditPayment" }
 
     trait :inactive do
@@ -13,7 +13,8 @@ FactoryBot.define do
     end
   end
 
-  factory :bank_payment, parent: :payment do
+  factory :bank_payment, parent: :payment, class: "BankPayment" do
+    association :bank
     type { "BankPayment" }
 
     trait :inactive do
