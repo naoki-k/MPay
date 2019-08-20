@@ -1,0 +1,21 @@
+// TODO: send使わないようにしたい。
+= form_for(user, url: send(user.send_path)) do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :tel
+  = f.text_field :tel, placeholder: "000-0000-0000"
+  = f.label :email
+  = f.text_field :email, type: :email
+  = f.label :password
+  = f.text_field :password, type: :password
+  = f.label :password_confirmation
+  = f.text_field :password_confirmation, type: :password
+
+  - if user.CorporateUser?
+    = f.fields_for :corporate_information do |info|
+      = info.label :address
+      = info.text_field :address, type: :address
+      = info.label :detail
+      = info.text_field :detail, type: :text
+
+  = f.submit

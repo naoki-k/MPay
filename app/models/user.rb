@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :credit_payment, presence: true
   validates :tel, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :type, presence: true, length: { maximum: 25 }
-  validates :name, length: { maximum: 25 }
+  validates :name, presence: true, length: { maximum: 25 }
   validates :email, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..30 }
 
@@ -38,6 +38,14 @@ class User < ApplicationRecord
 
   def trades
     (active_trades + passive_trades).uniq.sort_by(&:created_at)
+  end
+
+  def send_path
+    case type
+    when "AdminUser" then "users_admins_path"
+    when "CorporateUser" then "users_corporates_path"
+    when "PersonalUser" then "users_personals_path"
+    end
   end
 
   private
