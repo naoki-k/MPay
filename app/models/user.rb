@@ -27,7 +27,7 @@ class User < ApplicationRecord
   validates :tel, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :type, presence: true, length: { maximum: 25 }
   validates :name, presence: true, length: { maximum: 25 }
-  validates :email, length: { maximum: 255 }
+  validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..30 }
 
   has_secure_password

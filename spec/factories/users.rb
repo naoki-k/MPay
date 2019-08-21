@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :user do
     sequence(:tel, 012011110000) {|n| "user#{n}" }
     sequence(:name) {|n| "user#{n}"}
+    sequence(:email) {|n| "user#{n}@example.com"}
     password { "password" }
 
     trait :with_confirmation do
