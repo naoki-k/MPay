@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  def destroy
-
+  def index
+    @users = User.where(activated: false, type: "CorporateUser")
   end
 
-  def index
-    
+  def destroy
+
   end
 end

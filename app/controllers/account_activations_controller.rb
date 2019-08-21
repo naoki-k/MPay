@@ -1,4 +1,6 @@
 class AccountActivationsController < ApplicationController
+  before_action :admin_user, only: :authenticate
+
   def edit
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(params[:id])
@@ -11,5 +13,9 @@ class AccountActivationsController < ApplicationController
       flash[:danger] = "無効なリンクです。"
       redirect_to send(user.get_path)
     end
+  end
+
+  def authenticate
+    
   end
 end
