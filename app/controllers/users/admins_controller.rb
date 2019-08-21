@@ -14,10 +14,10 @@ class Users::AdminsController < ApplicationController
   def create
     @user = AdminUser.new(user_params)
     if @user.save
-      flash[:success] = ""
+      flash[:success] = "アカウント作成の申請をしました。"
       redirect_to new_users_admin_path
     else
-      flash.now[:danger] = ""
+      flash.now[:danger] = "アカウントの作成に失敗しました。"
       render :new
     end
   end
