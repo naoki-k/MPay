@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
+  before_create :create_activation_digest
 
   has_many :payments
   has_one :credit_payment
@@ -29,6 +30,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 25 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..30 }
+
+  attr_accessor :activation_token
 
   has_secure_password
 
@@ -60,5 +63,14 @@ class User < ApplicationRecord
 
     def create_mpay_credit
       build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: true)
+    end
+
+    def create_activation_digest
+      self.activation_token = SecureRandom.urlsafe_base64
+      self.activation_digest = User.digest(activation_token)
+    end
+
+    def User.digest(string)
+      BCrypt::Password.create(string)
     end
 end
