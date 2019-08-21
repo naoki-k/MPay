@@ -39,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
   host = 'localhost:3000'
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  config.action_mailer.default_url_options = { host: host, protocol: "http" }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

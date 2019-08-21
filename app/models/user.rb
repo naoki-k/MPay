@@ -51,6 +51,14 @@ class User < ApplicationRecord
     end
   end
 
+  def get_path
+    case type
+    when "AdminUser" then "new_users_admin_path"
+    when "CorporateUser" then "new_users_corporate_path"
+    when "PersonalUser" then "new_users_personal_path"
+    end
+  end
+
   def type_camel
     case type
     when "AdminUser" then "admin_user"
@@ -60,7 +68,7 @@ class User < ApplicationRecord
   end
 
   def authenticated?(token)
-    activation_digest == digest(token)
+    BCrypt::Password.new(activation_digest).is_password?(token)
   end
 
   private

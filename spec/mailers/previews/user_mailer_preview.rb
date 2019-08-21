@@ -19,8 +19,9 @@ class UserMailerPreview < ActionMailer::Preview
         email: "preview@example.com",
         password: "password",
         password_confirmation: "password",
-        activation_digest: BCrypt::Password.create(token)
       })
+      @user.update_attribute(:activation_digest, BCrypt::Password.create(token))
+      @user.update_attribute(:activated, false)
       @user.activation_token = token
       @user
     end
