@@ -1,0 +1,14 @@
+.signup-admin {
+  margin: 50px auto 0;
+  width: 500px;
+  border: 1px solid #74828F;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+  .signup-admin__title {
+    border-bottom: 10px solid #d43e30;
+    // background-color: #2D7DBC;
+    padding: 10px 8px 5px;
+    margin-bottom: 10px;
+  }
+}

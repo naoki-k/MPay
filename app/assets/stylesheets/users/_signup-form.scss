@@ -1,0 +1,30 @@
+.signup-form{
+  .signup-form__button-container {
+    text-align: center;
+  }
+
+  .signup-form__button {
+    width: 150px;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #FFD034;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .signup-form__field-container {
+    padding-left: 10px;
+  }
+
+  .signup-form__field {
+    width: 470px;
+    height: 25px;
+    margin-bottom: 5px;
+  }
+
+  .signup-form__field::placeholder {
+    padding: 10px;
+  }
+}
