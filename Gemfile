@@ -32,4 +32,5 @@ group :test do
   gem "factory_bot_rails"
   gem "haml_lint"
   gem "rspec-rails"
+  gem "rails-controller-testing"
 end

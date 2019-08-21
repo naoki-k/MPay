@@ -11,11 +11,11 @@ class AccountActivationsController < ApplicationController
       redirect_to send(user.get_path)
     else
       flash[:danger] = "無効なリンクです。"
-      redirect_to send(user.get_path)
+      redirect_to "/"
     end
   end
 
   def authenticate
-    
+
   end
 end
