@@ -35,6 +35,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Preview mailers with that path.
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

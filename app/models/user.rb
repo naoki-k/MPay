@@ -48,6 +48,14 @@ class User < ApplicationRecord
     end
   end
 
+  def type_camel
+    case type
+    when "AdminUser" then "admin_user"
+    when "CorporateUser" then "corporate_user"
+    when "PersonalUser" then "personal_user"
+    end
+  end
+
   private
 
     def create_mpay_credit

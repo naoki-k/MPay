@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # ユーザー
-  resources :users, only: :destroy
+  resources :users, only: [:destroy, :index]
   namespace :users do
     resources :admins, :corporates, only: [:new, :create, :show]
     resources :corporates, only: [:new, :create, :update, :show, :edit]
@@ -14,3 +14,4 @@ Rails.application.routes.draw do
   delete "sign_out", to: "sessions#destroy"
   
 end
+
