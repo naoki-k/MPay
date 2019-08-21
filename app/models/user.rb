@@ -59,6 +59,10 @@ class User < ApplicationRecord
     end
   end
 
+  def authenticated?(token)
+    activation_digest == digest(token)
+  end
+
   private
 
     def create_mpay_credit
@@ -67,10 +71,10 @@ class User < ApplicationRecord
 
     def create_activation_digest
       self.activation_token = SecureRandom.urlsafe_base64
-      self.activation_digest = User.digest(activation_token)
+      self.activation_digest = digest(activation_token)
     end
 
-    def User.digest(string)
+    def digest(string)
       BCrypt::Password.create(string)
     end
 end

@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   get "sign_in", to: "sessions#new"
   delete "sign_out", to: "sessions#destroy"
   
+  # アカウント有効化
+  resources :account_activations, only: :edit
 end
 

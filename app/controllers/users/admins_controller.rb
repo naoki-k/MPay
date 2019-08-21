@@ -1,5 +1,3 @@
-require "users/users_controller.rb"
-
 class Users::AdminsController < ApplicationController
   def new
     @user = AdminUser.new

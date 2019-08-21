@@ -1,5 +1,6 @@
 // TODO: send使わないようにしたい。
 = form_for(user, url: send(user.send_path)) do |f|
+  = render "shared/error_messages", object: f.object
   = f.label :name
   = f.text_field :name
   = f.label :tel

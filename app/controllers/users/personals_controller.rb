@@ -14,10 +14,11 @@ class Users::PersonalsController < ApplicationController
   def create
     @user = PersonalUser.new(user_params)
     if @user.save
-      flash[:success] = ""
-      redirect_to new_users_personal_path
+      UserMailer.account_activation(@user).deliver_now
+      flash[:success] = "仮登録が完了しました。メールから本登録をお願い致します。"
+      redirect_to new_users_personal_url
     else
-      flash.now[:danger] = ""
+      flash.now[:danger] = "登録に失敗しました。"
       render :new
     end
   end

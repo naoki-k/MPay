@@ -38,6 +38,8 @@ Rails.application.configure do
   # Preview mailers with that path.
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
