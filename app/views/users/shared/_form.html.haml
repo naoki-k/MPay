@@ -20,15 +20,15 @@
 
       .signup-form__field-container
         %span.material-icons.signup-form__icon email
-        = f.text_field :email, type: :email, placeholder: "メールアドレス", class: "signup-form__field"
+        = f.email_field :email, placeholder: "メールアドレス", class: "signup-form__field"
 
       .signup-form__field-container
         %span.material-icons.signup-form__icon lock
-        = f.text_field :password, type: :password, placeholder: "パスワード", class: "signup-form__field"
+        = f.password_field :password, placeholder: "パスワード", class: "signup-form__field"
 
       .signup-form__field-container
         %span.material-icons.signup-form__icon lock
-        = f.text_field :password_confirmation, type: :password, placeholder: "パスワードの確認", class: "signup-form__field"
+        = f.password_field :password_confirmation, placeholder: "パスワードの確認", class: "signup-form__field"
 
       - if information
         = f.fields_for :corporate_information do |info|

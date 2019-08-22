@@ -18,7 +18,7 @@ class AccountActivationsController < ApplicationController
     user = User.find_by_id(params[:id])
     if user
       if user.activated?
-        flash[:danger] = "このユーザーは有効化済みです。"
+        flash.now[:danger] = "このユーザーは有効化済みです。"
         render "users/index"
       else
         activate(user)
@@ -27,7 +27,7 @@ class AccountActivationsController < ApplicationController
         redirect_to users_url(type: params[:type])
       end
     else
-      flash[:danger] = "ユーザーが存在しません。"
+      flash.now[:danger] = "ユーザーが存在しません。"
       render "users/index"
     end
   end
