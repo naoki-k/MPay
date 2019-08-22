@@ -4,13 +4,13 @@
       = image_tag "icon.png", alt: 'Mpay', width: '130px', class: 'icon'
   %ul.header__sub-menu
     %li.header__sub-menu-item
-      TOP
+      = link_to "TOP", "#", class: "header__sub-menu-link"
     %li.header__sub-menu-item
-      MPayで出来ること
+      = link_to "MPayで出来ること", "#", class: "header__sub-menu-link"
     %li.header__sub-menu-item
     %li.header__sub-menu-item
-      新規登録
+      = link_to "新規登録", "#", class: "header__sub-menu-link"
     %li.header__sub-menu-item
-      ログイン
+    = link_to "ログイン", "#", class: "header__sub-menu-link"
     %li.header__sub-menu-item
-      問い合わせ
+    = link_to "問い合わせ", "#", class: "header__sub-menu-link"
