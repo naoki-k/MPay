@@ -1,0 +1,9 @@
+- if @users
+  - @users.each do |user|
+    = user.name
+    = link_to "有効化", authorize_path(user),
+                    data: { confirm: "このユーザーを有効化しますか?" }
+    = link_to "削除", user_path(user), method: :delete,
+                      data: { confirm: "このユーザーを削除しますか?" }
+- else
+  申請中のユーザーはいません。

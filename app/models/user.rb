@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
-  before_create :create_activation_digest
 
   has_many :payments
   has_one :credit_payment
@@ -75,11 +74,6 @@ class User < ApplicationRecord
 
     def create_mpay_credit
       build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: true)
-    end
-
-    def create_activation_digest
-      self.activation_token = SecureRandom.urlsafe_base64
-      self.activation_digest = digest(activation_token)
     end
 
     def digest(string)

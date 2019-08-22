@@ -14,6 +14,7 @@ class Users::AdminsController < ApplicationController
   def create
     @user = AdminUser.new(user_params)
     if @user.save
+      UserMailer.account_activate_request(@user).deliver_now
       flash[:success] = "アカウント作成の申請をしました。"
       redirect_to new_users_admin_path
     else

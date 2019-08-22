@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   
   # アカウント有効化
   resources :account_activations, only: :edit
-  get "authenticate", to: "account_activations#authenticate"
+  get "authorize/:id", to: "account_activations#authorize", as: "authorize"
 end
 

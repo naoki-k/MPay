@@ -15,6 +15,7 @@ class Users::CorporatesController < ApplicationController
     @user = CorporateUser.new(user_params)
     @information = CorporateInformation.new(information_params)
     if @user.save
+      UserMailer.account_activate_request(@user).deliver_now
       flash[:success] = "アカウント作成の申請をしました。"
       @information.corporate_user = @user
       flash[:info] = "企業情報の登録に失敗しました。" unless @information.save
