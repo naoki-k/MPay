@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def index
     if params[:type]&.equal?("AdminUser")
-      @users = AdminUser.where(activated: false).order("updated_at DESC").paginate(page: params[:page])
+      @users = AdminUser.where(activated: false).order("updated_at DESC").paginate(page: params[:page], per_page: 20)
     else
-      @users = CorporateUser.where(activated: false).order("updated_at DESC").paginate(page: params[:page])
+      @users = CorporateUser.where(activated: false).order("updated_at DESC").paginate(page: params[:page], per_page: 20)
     end
   end
 
