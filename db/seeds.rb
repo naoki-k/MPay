@@ -1,40 +1,40 @@
 mizuho = Bank.create!({
   name: "ミズホ",
-  code: "123-45"
+  code: Faker::Finance.credit_card
 })
 
 admin_user = AdminUser.create!({
-  tel: "000-0000-0000",
+  tel: Faker::PhoneNumber.unique.cell_phone,
   name: "admin_user",
   password: "password",
-  email: "admin_user@example.com"
+  email: Faker::Internet.unique.email
 })
 
 corporate_user = CorporateUser.create!({
-  tel: "100-0000-0000",
-  name: "corporate_user",
+  tel: Faker::PhoneNumber.unique.cell_phone,
+  name: Faker::Name.last_name + "株式会社",
   password: "password",
-  email: "corporate_user@example.com"
+  email: Faker::Internet.unique.email
 })
 
 personal_user_1 = PersonalUser.create!({
-  tel: "000-0000-0001",
-  name: "personal_user_1",
+  tel: Faker::PhoneNumber.unique.cell_phone,
+  name: Faker::Name.unique.name,
   password: "password",
-  email: "personal_user_1@example.com"
+  email: Faker::Internet.unique.email
 })
 
 personal_user_1.bank_payments.create!({
   bank: mizuho,
-  number: "200-0000-0002",
+  number: Faker::PhoneNumber.unique.cell_phone,
   is_active: true
 })
 
 personal_user_2 = PersonalUser.create!({
-  tel: "200-0000-0002",
-  name: "personal_user_2",
+  tel: Faker::PhoneNumber.unique.cell_phone,
+  name: Faker::Name.unique.name,
   password: "password",
-  email: "personal_user_2@example.com"
+  email: Faker::Internet.unique.email
 })
 
 Trade.create!({
@@ -66,3 +66,18 @@ Trade.create!({
   passive_payment: corporate_user.credit_payment,
   amount: 3000
 })
+
+30.times do
+  CorporateUser.create!({
+    tel: Faker::PhoneNumber.unique.cell_phone,
+    name: Faker::Name.last_name + "株式会社",
+    password: "password",
+    email: Faker::Internet.unique.email
+  })
+  PersonalUser.create!({
+    tel: Faker::PhoneNumber.unique.cell_phone,
+    name: Faker::Name.unique.name,
+    password: "password",
+    email: Faker::Internet.unique.email
+  })
+end
