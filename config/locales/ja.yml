@@ -1,0 +1,25 @@
+ja:
+  activerecord:
+    models:
+      corporate_user: 企業
+      admin_user: 管理者
+      personal_user: 個人
+    attributes:
+      corporate_user:
+        name: 企業名
+        tel: 電話番号
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+      admin_user:
+        name: 名前
+        tel: 電話番号
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+      personal_user:
+        name: 名前
+        tel: 電話番号
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）

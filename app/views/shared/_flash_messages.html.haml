@@ -1,4 +1,6 @@
 - if flash.present?
   - flash.each do |type, _msg|
-    %div
-      = _msg
+    .flash-message
+      %div{class: "flash-message__#{type}"}
+        .flash-message__container
+          = _msg

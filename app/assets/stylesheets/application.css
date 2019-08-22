@@ -14,9 +14,6 @@
  *= require_self
  */
 
-@import "layouts/layout";
-@import "users/user";
-
 .body {
   margin: 0px;
 }
