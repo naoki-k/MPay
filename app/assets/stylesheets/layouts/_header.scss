@@ -14,21 +14,30 @@
 
   .header__sub-menu {
     width: 100%;
-    background-color: rgb(96, 187, 200);
+    background-color: #60bbc8;
     margin: 25px 0 0;
     text-align: center;
     padding: 0px;
   }
 
   .header__sub-menu-item {
-    display: inline;
+    display: inline-block;
     font-size: 15px;
     padding: 0 10px;
-    line-height: 50px;
+    height: 50px;
+  }
+
+  .header__sub-menu-item:hover {
+    background-color: #42849a;
   }
 
   .header__sub-menu-link {
+    display: inline-block;
     text-decoration: none;
     color: #ffffff;
+    height: 50px;
+    line-height: 50px;
   }
+
+
 }
