@@ -11,6 +11,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
+        corporate_information: 企業情報
       admin_user:
         name: 名前
         tel: 電話番号
