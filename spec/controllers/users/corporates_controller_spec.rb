@@ -17,7 +17,7 @@ RSpec.describe Users::CorporatesController, type: :controller do
       it :aggregate_failures do
         expect {
           post :create, params: { corporate_user: params }
-        }.to change { User.count }.by(1)
+        }.to change { User.count }.by(1).and change { ActionMailer::Base.deliveries.size }.by(1)
         expect(response).to have_http_status :redirect
         expect(flash[:success]).not_to be_empty
       end
@@ -29,9 +29,9 @@ RSpec.describe Users::CorporatesController, type: :controller do
       it :aggregate_failures do
         expect {
           post :create, params: { corporate_user: params }
-        }.not_to change { User.count }
+        }.to change { User.count }.by(0).and change { ActionMailer::Base.deliveries.size }.by(0)
         expect(response).to render_template :new
-        expect(flash[:error]).not_to be_empty
+        expect(flash[:danger]).not_to be_empty
       end
     end
   end

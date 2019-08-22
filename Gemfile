@@ -16,6 +16,7 @@ gem "bootsnap", require: false
 gem "rails-i18n"
 gem 'turbolinks'
 gem 'sass-rails'
+gem 'will_paginate',  '3.1.7'
 
 group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
@@ -34,4 +35,6 @@ group :test do
   gem "haml_lint"
   gem "rspec-rails"
   gem "rails-controller-testing"
+  gem "faker", "1.7.3"
+  gem 'database_cleaner'
 end
