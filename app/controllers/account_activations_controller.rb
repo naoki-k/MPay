@@ -1,4 +1,6 @@
 class AccountActivationsController < ApplicationController
+  include Authority
+
   before_action :admin_user, only: :authorize
 
   def edit
@@ -33,10 +35,6 @@ class AccountActivationsController < ApplicationController
   end
 
   private
-
-    def admin_user
-      "管理者としてログインしてください"
-    end
 
     def activate(user)
       user.update_attribute(:activated, true)

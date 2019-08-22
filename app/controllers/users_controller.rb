@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  include Authority
+
+  before_action :admin_user
+
   def index
     if params[:type]&.equal?("AdminUser")
       @users = AdminUser.where(activated: false).order("updated_at DESC").paginate(page: params[:page], per_page: 20)
