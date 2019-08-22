@@ -1,0 +1,7 @@
+.signup-admin
+  .signup-admin__title
+    管理者アカウント
+
+  -# ※申請が承認された後に有効になります。
+  = render "shared/flash_messages"
+  = render "users/shared/form", user: @user

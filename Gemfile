@@ -14,6 +14,8 @@ gem "haml-rails"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "rails-i18n"
+gem 'turbolinks'
+gem 'sass-rails'
 
 group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
@@ -31,4 +33,5 @@ group :test do
   gem "factory_bot_rails"
   gem "haml_lint"
   gem "rspec-rails"
+  gem "rails-controller-testing"
 end

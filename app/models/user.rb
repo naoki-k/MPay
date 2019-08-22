@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
+  before_create :create_activation_digest
 
   has_many :payments
   has_one :credit_payment
@@ -26,9 +27,11 @@ class User < ApplicationRecord
   validates :credit_payment, presence: true
   validates :tel, presence: true, uniqueness: true, length: { maximum: 25 }
   validates :type, presence: true, length: { maximum: 25 }
-  validates :name, length: { maximum: 25 }
-  validates :email, length: { maximum: 255 }
+  validates :name, presence: true, length: { maximum: 25 }
+  validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..30 }
+
+  attr_accessor :activation_token
 
   has_secure_password
 
@@ -40,9 +43,46 @@ class User < ApplicationRecord
     (active_trades + passive_trades).uniq.sort_by(&:created_at)
   end
 
+  def send_path
+    case type
+    when "AdminUser" then "users_admins_path"
+    when "CorporateUser" then "users_corporates_path"
+    when "PersonalUser" then "users_personals_path"
+    end
+  end
+
+  def get_path
+    case type
+    when "AdminUser" then "new_users_admin_path"
+    when "CorporateUser" then "new_users_corporate_path"
+    when "PersonalUser" then "new_users_personal_path"
+    end
+  end
+
+  def type_camel
+    case type
+    when "AdminUser" then "admin_user"
+    when "CorporateUser" then "corporate_user"
+    when "PersonalUser" then "personal_user"
+    end
+  end
+
+  def authenticated?(token)
+    BCrypt::Password.new(activation_digest).is_password?(token)
+  end
+
   private
 
     def create_mpay_credit
       build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: true)
+    end
+
+    def create_activation_digest
+      self.activation_token = SecureRandom.urlsafe_base64
+      self.activation_digest = digest(activation_token)
+    end
+
+    def digest(string)
+      BCrypt::Password.create(string)
     end
 end

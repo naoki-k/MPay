@@ -1,0 +1,42 @@
+.signup-form
+  // TODO: send使わないようにしたい。
+  = form_for(user, url: send(user.send_path)) do |f|
+    = render "shared/error_messages", object: f.object
+
+    .signup-form__field-container
+      - if user.CorporateUser?
+        %span.material-icons.signup-form__icon person
+        = f.text_field :name, placeholder: "企業名", class: "signup-form__field"
+      - else
+        %span.material-icons.signup-form__icon person
+        = f.text_field :name, placeholder: "名前", class: "signup-form__field"
+
+    .signup-form__field-container
+      %span.material-icons.signup-form__icon local_phone
+      = f.text_field :tel, placeholder: "電話番号（000-0000-0000）", class: "signup-form__field"
+
+    .signup-form__field-container
+      %span.material-icons.signup-form__icon email
+      = f.text_field :email, type: :email, placeholder: "メールアドレス", class: "signup-form__field"
+
+    .signup-form__field-container
+      %span.material-icons.signup-form__icon lock
+      = f.text_field :password, type: :password, placeholder: "パスワード", class: "signup-form__field"
+
+    .signup-form__field-container
+      %span.material-icons.signup-form__icon lock
+      = f.text_field :password_confirmation, type: :password, placeholder: "パスワードの確認", class: "signup-form__field"
+
+    - if user.CorporateUser?
+      = f.fields_for :corporate_information do |info|
+
+        .signup-form__field-container
+          %span.material-icons.signup-form__icon home
+          = info.text_field :address, type: :address, placeholder: "住所", class: "signup-form__field"
+
+        .signup-form__field-container
+          %span.material-icons.signup-form__icon comment
+          = info.text_field :detail, type: :text, placeholder: "備考", class: "signup-form__field"
+
+    .signup-form__button-container
+      = f.submit "登録", class: "signup-form__button"

@@ -1,0 +1,7 @@
+.signup-corporate
+  .signup-corporate__title
+    企業向けアカウント
+
+  -# ※メールを確認して、アカウント登録を完了させてください。
+  = render "shared/flash_messages"
+  = render "users/shared/form", user: @user, corporate_information: @corporate_information

@@ -1,0 +1,34 @@
+.header {
+  width: 100%;
+  text-align: center;
+
+  .header__title-container {
+    height: 70px;
+    width: 600px;
+    margin: 0 auto;
+  }
+
+  .header__title {
+    padding: 15px 10px 0;
+  }
+
+  .header__sub-menu {
+    width: 100%;
+    background-color: rgb(96, 187, 200);
+    margin: 25px 0 0;
+    text-align: center;
+    padding: 0px;
+  }
+
+  .header__sub-menu-item {
+    display: inline;
+    font-size: 15px;
+    padding: 0 10px;
+    line-height: 50px;
+  }
+
+  .header__sub-menu-link {
+    text-decoration: none;
+    color: #ffffff;
+  }
+}
