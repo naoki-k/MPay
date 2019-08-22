@@ -1,0 +1,20 @@
+.flash-message {
+  font-size: 13px;
+  height: 23px;
+
+  .flash-message__danger {
+    background-color: #fc9a86;
+  }
+
+  .flash-message__success {
+    background-color: #86fcbb;
+  }
+
+  .flash-message__container {
+    width: 500px;
+    margin: 0 auto;
+    padding-left: 35px;
+    vertical-align: middle;
+    line-height: 23px;
+  }
+}
