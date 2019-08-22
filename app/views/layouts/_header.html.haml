@@ -1,5 +1,16 @@
 .header
   .header__title-container
-    .header__title Mpay
-    .header__sub-title
+    .header__title
+      = image_tag "icon.png", alt: 'Mpay', width: '130px', class: 'icon'
+  %ul.header__sub-menu
+    %li.header__sub-menu-item
+      TOP
+    %li.header__sub-menu-item
+      MPayで出来ること
+    %li.header__sub-menu-item
+    %li.header__sub-menu-item
       = signup_title(request.path)
+    %li.header__sub-menu-item
+      ログイン
+    %li.header__sub-menu-item
+      問い合わせ
