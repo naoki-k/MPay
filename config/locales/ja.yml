@@ -10,13 +10,16 @@ ja:
         tel: 電話番号
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード（確認）
       admin_user:
         name: 名前
         tel: 電話番号
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード（確認）
       personal_user:
         name: 名前
         tel: 電話番号
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード（確認）
