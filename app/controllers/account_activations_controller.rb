@@ -15,7 +15,7 @@ class AccountActivationsController < ApplicationController
   end
 
   def authorize
-    user = User.find(params[:id])
+    user = User.find_by_id(params[:id])
     if user
       if user.activated?
         flash[:danger] = "このユーザーは有効化済みです。"

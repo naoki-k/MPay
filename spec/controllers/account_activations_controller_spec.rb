@@ -40,4 +40,40 @@ RSpec.describe AccountActivationsController, type: :controller do
       end
     end
   end
+
+  describe "#authorize" do
+    let!(:user) { create(:corporate_user) }
+
+    context "when authorize success" do
+      it :aggregate_failures do
+        expect {
+          get :authorize, params: { id: user.id }
+        }.to change { user.reload.activated? }.from(false).to(true).and change { ActionMailer::Base.deliveries.size }.by(1)
+        expect(response).to have_http_status :redirect
+        expect(flash[:success]).not_to be_empty
+      end
+    end
+
+    context "when user not found" do
+      it :aggregate_failures do
+        expect {
+          get :authorize, params: { id: "invalid" }
+        }.not_to change { ActionMailer::Base.deliveries.size }
+        expect(response).to render_template "users/index"
+        expect(flash[:danger]).not_to be_empty
+      end
+    end
+
+    context "when user already authorized" do
+      before { user.update_attribute(:activated, true) }
+
+      it :aggregate_failures do
+        expect {
+          get :authorize, params: { id: user.id }
+        }.not_to change { ActionMailer::Base.deliveries.size }
+        expect(response).to render_template "users/index"
+        expect(flash[:danger]).not_to be_empty
+      end
+    end
+  end
 end

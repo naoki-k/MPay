@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
 
-  has_many :payments
+  has_many :payments, dependent: :destroy
   has_one :credit_payment
   has_many :bank_payments
   has_many :active_trades, through: :payments

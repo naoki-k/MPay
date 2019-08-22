@@ -35,4 +35,6 @@ group :test do
   gem "haml_lint"
   gem "rspec-rails"
   gem "rails-controller-testing"
+  gem "faker", "1.7.3"
+  gem 'database_cleaner'
 end
