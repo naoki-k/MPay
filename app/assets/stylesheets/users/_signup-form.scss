@@ -1,3 +1,5 @@
+@import "shared/colors";
+
 .signup-form{
   .signup-form__main {
     margin-top: 20px;
@@ -12,7 +14,8 @@
     height: 40px;
     padding: 5px 10px;
     margin: 10px 10px 15px;
-    background-color: #FFD034;
+    background-color: $pink;
+    color: $white;
     border-style: none;
     border-radius: 5px;
     font-size: 12px;
@@ -20,7 +23,7 @@
 
   .signup-form__field-container {
     display: flex;
-    border: 1px solid #e4e2e2;
+    border: 1px solid $navy-3S;
     margin: 5px 10px;
   }
 
@@ -35,11 +38,12 @@
   .signup-form__field::placeholder {
     padding: 10px;
     vertical-align: middle;
+    color: $navy-1S;
   }
 
   .signup-form__icon {
-    color: #757575;
-    background-color: #f0f0f0;
+    color: $navy;
+    background-color: $gold-5S;
     height: 33px;
     vertical-align: middle;
     padding: 0 10px;
