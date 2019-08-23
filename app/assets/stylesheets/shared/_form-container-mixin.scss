@@ -1,4 +1,4 @@
-@mixin signup-layout {
+@mixin form-layout {
   margin: 50px auto 0;
   width: 500px;
   border: 1px solid $navy-3S;
@@ -6,7 +6,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-@mixin signup-layout__title($color) {
+@mixin form-layout__title($color) {
   border-bottom: 10px solid $color;
   padding: 10px 10px 5px;
 }

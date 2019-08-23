@@ -1,0 +1,60 @@
+@import "shared/colors";
+@import "shared/form-container-mixin";
+
+.signin-form {
+  @include form-layout;
+
+  .signin-layout__title {
+    @include form-layout__title($gold-1S);
+  }
+
+  .signin-form__main {
+    margin-top: 20px;
+  }
+
+  .signin-form__field-container {
+    display: flex;
+    border: 1px solid $navy-3S;
+    margin: 5px 10px;
+  }
+
+  .signin-form__icon {
+    color: $navy;
+    background-color: $gold-5S;
+    height: 33px;
+    vertical-align: middle;
+    padding: 0 10px;
+    line-height: 33px;
+    font-size: 15px;
+  }
+
+  .signin-form__field {
+    width: 420px;
+    height: 30px;
+    outline: 0;
+    border: 0px;
+    padding-left: 15px;
+  }
+
+  .signin-form__field::placeholder {
+    padding: 10px;
+    vertical-align: middle;
+    color: $navy-1S;
+  }
+
+  .signin-form__button-container {
+    text-align: center;
+  }
+
+  .signin-form__button {
+    width: 150px;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 10px 10px 15px;
+    background-color: $pink;
+    color: $white;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+}
