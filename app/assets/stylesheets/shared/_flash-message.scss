@@ -1,13 +1,15 @@
+@import "shared/colors";
+
 .flash-message {
   font-size: 13px;
   height: 23px;
 
   .flash-message__danger {
-    background-color: #fc9a86;
+    background-color: $red-3S;
   }
 
   .flash-message__success {
-    background-color: #7debae;
+    background-color: $green-3S;
   }
 
   .flash-message__container {
