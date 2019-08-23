@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
-  before_create :create_user_code
+  after_create :create_user_code
 
   has_many :payments, dependent: :destroy
   has_one :credit_payment
@@ -78,10 +78,7 @@ class User < ApplicationRecord
     end
 
     def create_user_code
-      while true do
-        self.code = SecureRandom.hex(10)
-        break unless User.find_by(code: code)
-      end
+      update_attribute(:code, SecureRandom.alphanumeric(12) + id.to_s)
     end
 
     def digest(string)

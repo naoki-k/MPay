@@ -1,3 +1,6 @@
-= form_for(@trade) do |f|
+= form_for(:confirmation, url: trade_confirmation_path) do |f|
   = f.label :amount
-  = f.text_firld :amount
+  = f.text_field :amount
+  = f.label :target_user_code
+  = f.text_field :target_user_code
+  = f.submit

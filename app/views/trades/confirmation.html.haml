@@ -1,0 +1,12 @@
+- if @user.nil?
+  ユーザーが見つかりませんでした。
+- else
+  - if @amount.blank?
+    金額を指定してください。
+  - else
+    = form_for(@trade) do |f|
+      = f.label :amount
+      = f.hidden_field :amount, value: @amount
+      = f.label :target_user_id
+      = f.hidden_field :target_user_id, value: @user.id
+      = f.submit "確定する"

@@ -13,6 +13,7 @@ class Trade < ApplicationRecord
   validates :amount, presence: true
   validates :active_payment, presence: true
   validates :passive_payment, presence: true
+  validate :tradable
 
   def type
     if sender == receiver
@@ -25,4 +26,15 @@ class Trade < ApplicationRecord
       TYPE.slice(:with_personal_user)
     end
   end
+
+  private
+
+    def tradable
+      is_active = active_payment&.is_active? && passive_payment&.is_active?
+      if active_payment&.CreditPayment?
+        is_active && active_payment&.payable?(amount)
+      else
+        is_active
+      end
+    end
 end

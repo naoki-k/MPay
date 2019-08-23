@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_055141) do
     t.string "activation_digest"
     t.boolean "activated", default: false
     t.datetime "activated_at"
-    t.string "code", limit: 25, null: false
+    t.string "code", limit: 25
     t.index ["code"], name: "index_users_on_code", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["tel"], name: "index_users_on_tel", unique: true

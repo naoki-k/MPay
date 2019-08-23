@@ -4,12 +4,20 @@ class TradesController < ApplicationController
   end
 
   def create
-
+    target_payment = User.find_by_id(params[:target_user_id])&.credit_payment
+    if target_payment
+      @trade = Trade.new(active_payment: current_user.credit_payment,
+                         passive_payment: target_payment,
+                         amount: params[:amount])
+      if @trade.save
+        "hogehoge"
+      end
+    end
   end
 
-  private
-
-    def trade_params
-      params.require(:trade).permit()
-    end
+  def confirmation
+    @user = User.find_by(code: params[:target_user_code])
+    @amount = params[:amount]
+    render
+  end
 end
