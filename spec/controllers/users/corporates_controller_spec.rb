@@ -13,10 +13,11 @@ RSpec.describe Users::CorporatesController, type: :controller do
   describe "#create" do
     context "when register success" do
       let(:params) { attributes_for(:corporate_user, :with_confirmation) }
+      let(:information_params) { attributes_for(:corporate_information) }
 
       it :aggregate_failures do
         expect {
-          post :create, params: { corporate_user: params }
+          post :create, params: { corporate_user: { **params, corporate_information: information_params} }
         }.to change { User.count }.by(1).and change { ActionMailer::Base.deliveries.size }.by(1)
         expect(response).to have_http_status :redirect
         expect(flash[:success]).not_to be_empty

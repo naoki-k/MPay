@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if @user&.authenticate(params[:session][:password])
       if @user.activated?
         sign_in @user
-        flash[:succees] = "ログインしました。"
+        flash[:success] = "ログインしました。"
         redirect_to "/"
       else
         flash.now[:danger] = "アカウントが有効化されていません。"

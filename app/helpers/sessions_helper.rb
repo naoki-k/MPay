@@ -1,4 +1,4 @@
-module SessionHelper
+module SessionsHelper
   def sign_in(user)
     session[:user_id] = user.id
   end
@@ -10,7 +10,7 @@ module SessionHelper
   end
 
   def signed_in?
-    @current_user.present?
+    current_user.present?
   end
 
   def current_user?(user)

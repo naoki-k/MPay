@@ -15,6 +15,10 @@ FactoryBot.define do
   end
 
   factory :corporate_user, parent: :user, class: "CorporateUser" do
+    before(:build) do |corporate_user|
+      corporate_user.corporate_information = build(:corporate_information)
+    end
+
     type { "CorporateUser" }
   end
 
