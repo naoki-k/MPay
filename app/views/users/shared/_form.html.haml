@@ -2,7 +2,7 @@
   // TODO: send使わないようにしたい。
   = form_for(user, url: send(user.send_path)) do |f|
     = render "shared/error_messages", object: f.object
-    - if information
+    - if user.CorporateUser?
       = render "shared/error_messages", object: information
 
     .signup-form__main
@@ -30,7 +30,7 @@
         %span.material-icons.signup-form__icon lock
         = f.password_field :password_confirmation, placeholder: "パスワードの確認", class: "signup-form__field"
 
-      - if information
+      - if user.CorporateUser?
         = f.fields_for :corporate_information do |info|
 
           .signup-form__field-container
