@@ -1,6 +1,16 @@
-= form_for :session, url: sessions_path do |f|
-  = f.label :email
-  = f.email_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.submit
+.signin-form
+  .signin-layout__title
+    MPayアカウント
+
+  = form_for :session, url: sessions_path do |f|
+    .signin-form__main
+      .signin-form__field-container
+        %span.material-icons.signin-form__icon email
+        = f.email_field :email, placeholder: "メールアドレス", class: "signin-form__field"
+
+      .signin-form__field-container
+        %span.material-icons.signin-form__icon lock
+        = f.password_field :password, placeholder: "パスワード", class: "signin-form__field"
+
+      .signin-form__button-container
+        = f.submit "ログイン", class: "signin-form__button"

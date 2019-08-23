@@ -1,10 +1,10 @@
 @import "shared/colors";
-@import "users/signup-mixin";
+@import "shared/form-container-mixin";
 
 .signup-personal {
-  @include signup-layout;
+  @include form-layout;
 
   .signup-personal__title {
-    @include signup-layout__title($green-1S);
+    @include form-layout__title($green-1S);
   }
 }
