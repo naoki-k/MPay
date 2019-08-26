@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :personals, only: [:new, :create, :update, :edit], path: ""
   end
 
+  # マイページ
+  resource :my_page, only: :show
+
   # ログイン、ログアウト
   resources :sessions, only: :create
   get "sign_in", to: "sessions#new"
@@ -21,4 +24,3 @@ Rails.application.routes.draw do
   resource :trade, only: [:new, :create]
   post "trade/confirmation", to: "trades#confirmation", as: "trade_confirmation"
 end
-
