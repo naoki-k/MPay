@@ -22,7 +22,7 @@ class Payment < ApplicationRecord
 
     def only_one_credit_each_user
       if self.class.where(type: :CreditPayment, user: user).present?
-        errors.add(:user, "already have a credit")
+        errors.add(:user, "はMPay口座を持っています。")
       end
     end
 

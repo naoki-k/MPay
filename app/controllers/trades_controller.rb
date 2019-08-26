@@ -10,7 +10,11 @@ class TradesController < ApplicationController
                          passive_payment: target_payment,
                          amount: params[:amount])
       if @trade.save
-        "hogehoge"
+        flash[:success] = "取引が正常に行われました。"
+        redirect_to new_trade_url
+      else
+        flash[:error] = "取引に失敗しました。"
+        redirect_to new_trade_url
       end
     end
   end
