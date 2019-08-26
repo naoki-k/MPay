@@ -3,10 +3,6 @@ class Users::AdminsController < ApplicationController
     @user = AdminUser.new
   end
 
-  def show
-
-  end
-
   def edit
     
   end

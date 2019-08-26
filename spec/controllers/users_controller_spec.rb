@@ -56,4 +56,41 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "#show" do
+    context "when user signed in" do
+      let(:user) { create(:personal_user) }
+      before { session[:user_id] = user.id }
+
+      context "when show admin user" do
+        let(:admin) { create(:admin_user)}
+        before { get :show, params: { id: admin.id } }
+
+        it :aggregate_failures do
+          expect(response).to have_http_status :ok
+          expect(response).to render_template "users/admin_user/show"
+        end
+      end
+
+      context "when show corporate user" do
+        let(:corporate) { create(:corporate_user) }
+        before { get :show, params: { id: corporate.id } }
+
+        it :aggregate_failures do
+          expect(response).to have_http_status :ok
+          expect(response).to render_template "users/corporate_user/show"
+        end
+      end
+
+      context "when show personal user" do
+        let(:personal) { create(:personal_user) }
+        before { get :show, params: { id: personal.id } }
+
+        it :aggregate_failures do
+          expect(response).to have_http_status :ok
+          expect(response).to render_template "users/personal_user/show"
+        end
+      end
+    end
+  end
 end
