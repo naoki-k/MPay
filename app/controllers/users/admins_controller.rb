@@ -1,15 +1,6 @@
 class Users::AdminsController < ApplicationController
-  include Authority
-  before_action :require_sign_in, only: :show
-  before_action -> { correct_type("AdminUser") }, only: :show
-
   def new
     @user = AdminUser.new
-  end
-
-  def show
-    @user = current_user
-    @credit_payment = @user.credit_payment
   end
 
   def edit

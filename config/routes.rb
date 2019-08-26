@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   # ユーザー
-  resources :users, only: [:destroy, :index]
+  resources :users, only: [:destroy, :index, :show]
   namespace :users do
-    resources :admins, :corporates, only: [:new, :create, :show]
-    resources :corporates, only: [:new, :create, :update, :show, :edit]
-    resources :personals, only: [:new, :create, :update, :show, :edit], path: ""
+    resources :admins, :corporates, only: [:new, :create]
+    resources :corporates, only: [:new, :create, :update, :edit]
+    resources :personals, only: [:new, :create, :update, :edit], path: ""
   end
 
   # ログイン、ログアウト
