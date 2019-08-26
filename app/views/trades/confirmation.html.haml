@@ -1,6 +1,6 @@
-= form_for(@trade) do |f|
-  = f.label :amount
+= form_for(@trade, url: trade_path) do |f|
+  = @amount
   = f.hidden_field :amount, value: @amount
-  = f.label :target_user_id
+  = @user.name
   = f.hidden_field :target_user_id, value: @user.id
   = f.submit "確定する"
