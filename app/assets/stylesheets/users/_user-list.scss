@@ -1,4 +1,4 @@
-@import "shared/colors";
+ @import "shared/colors";
 @mixin link-button($color) {
   display: inline-block;
   background-color: $white;
@@ -9,25 +9,37 @@
   border: 1px solid $gold-4S;
 }
 
-
 .user-list {
   width: 800px;
   margin: 20px auto;
 
   .user-list__title {
     margin: 0;
+    display: inline-block;
+  }
+
+  .user-list__switching {
+    display: inline-block;
   }
 
   .user-list__switching-form {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    color: $navy;
     outline: none;
-    background: none transparent;
+    padding: 10px;
+    border: 1px solid $navy-2S;
+    background-color: $white;
+    margin: -6px 20px 6px;
+    vertical-align: middle;
   }
+
 
   .user-list__items {
     background-color: $gold-5S;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
     border-top: 7px solid $gold-3S;
   }
 
