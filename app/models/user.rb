@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   before_validation :create_mpay_credit, on: :create
-  after_create :create_user_code
 
   has_many :payments, dependent: :destroy
   has_one :credit_payment
@@ -75,10 +74,6 @@ class User < ApplicationRecord
 
     def create_mpay_credit
       build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: false)
-    end
-
-    def create_user_code
-      update_attribute(:code, SecureRandom.alphanumeric(12) + id.to_s)
     end
 
     def digest(string)

@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  before_save :encrypt_number
+  before_create :encrypt_number
 
   has_many :active_trades, class_name: :Trade,
                            foreign_key: :active_payment_id

@@ -30,13 +30,13 @@ class Trade < ApplicationRecord
   private
 
     def tradable
-      if active_payment&.is_active?
+      unless active_payment&.is_active?
         errors.add(:active_payment, "は無効なMPay口座です。")
       end
-      if passive_payment&.is_active?
+      unless passive_payment&.is_active?
         errors.add(:passive_payment, "は無効なMPay口座です。")
       end
-      if active_payment&.CreditPayment? && active_payment&.payable?(amount)
+      if active_payment&.CreditPayment? && !active_payment&.payable?(amount)
         errors.add(:active_payment, "は残高を超えた支払いができません。")
       end
     end
