@@ -1,4 +1,4 @@
- @import "shared/colors";
+@import "shared/colors";
 @mixin link-button($color) {
   display: inline-block;
   background-color: $white;
@@ -38,7 +38,7 @@
 
   .user-list__items {
     background-color: $gold-5S;
-    padding: 10px;
+    padding: 0 10px;
     margin-bottom: 10px;
     border-top: 7px solid $gold-3S;
   }
