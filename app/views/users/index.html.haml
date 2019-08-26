@@ -1,7 +1,15 @@
 .user-list
   %h1.user-list__title アカウント管理
-  - if @users
-    .user-list__items
+  .user-list__switching
+    = form_with(url: users_path, method: :get) do |f|
+      = f.select :type,
+        [["企業","CorporateUser"],["管理者", "AdminUser"]],
+        { selected: params[:type] },
+        class: "user-list__switching-form",
+        onChange: "submit(this.form)"
+
+  .user-list__items
+    - if @users
       - @users.each do |user|
         .user-list__item-container
           .user-list__item-name
@@ -13,7 +21,7 @@
             = link_to "削除", user_path(user), method: :delete,
                               data: { confirm: "このユーザーを削除しますか?" },
                               class: "user-list__item-destroy"
-    .apple_pagination
-      = will_paginate @users
-  - else
-    申請中のユーザーはいません。
+      .apple_pagination
+        = will_paginate @users
+    - else
+      申請中のユーザーはいません。
