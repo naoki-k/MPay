@@ -1,12 +1,28 @@
-- if @users
-  - @users.each do |user|
-    %div
-      = user.name
-      = link_to "有効化", authorize_path(user),
-                      data: { confirm: "このユーザーを有効化しますか?" }
-      = link_to "削除", user_path(user), method: :delete,
-                        data: { confirm: "このユーザーを削除しますか?" }
-  .apple_pagination
-    = will_paginate @users
-- else
-  申請中のユーザーはいません。
+.user-list
+  %h1.user-list__title アカウント管理
+  .user-list__switching
+    = form_with(url: users_path, method: :get) do |f|
+      = f.select :type,
+        [["企業","CorporateUser"],["管理者", "AdminUser"]],
+        { selected: params[:type] },
+        class: "user-list__switching-form",
+        onChange: "submit(this.form)"
+
+  .user-list__items
+    - if @users
+      - @users.each do |user|
+        .user-list__item-container
+          .user-list__item-name
+            = user.name
+          .user-list__item-links
+            = link_to "有効化", authorize_path(user),
+                            data: { confirm: "このユーザーを有効化しますか?" },
+                            class: "user-list__item-active"
+            = link_to "削除", user_path(user), method: :delete,
+                              data: { confirm: "このユーザーを削除しますか?" },
+                              class: "user-list__item-destroy"
+      - if @users.count > 20
+        .apple_pagination
+          = will_paginate @users, previous_label: ' &lt 前へ', next_label: '次へ &gt'
+    - else
+      申請中のユーザーはいません。

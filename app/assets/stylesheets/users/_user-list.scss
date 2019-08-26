@@ -1,0 +1,70 @@
+@import "shared/colors";
+@mixin link-button($color) {
+  display: inline-block;
+  background-color: $white;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: $color;
+  border: 1px solid $gold-4S;
+}
+
+.user-list {
+  width: 800px;
+  margin: 20px auto;
+
+  .user-list__title {
+    margin: 0;
+    display: inline-block;
+  }
+
+  .user-list__switching {
+    display: inline-block;
+  }
+
+  .user-list__switching-form {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    color: $navy;
+    outline: none;
+    padding: 10px;
+    border: 1px solid $navy-2S;
+    background-color: $white;
+    margin: -6px 20px 6px;
+    vertical-align: middle;
+  }
+
+
+  .user-list__items {
+    background-color: $gold-5S;
+    padding: 0 10px 10px;
+    margin-bottom: 10px;
+    border-top: 7px solid $gold-3S;
+  }
+
+  .user-list__item-container {
+    padding: 5px 10px;
+    margin: 10px 5px;
+    border-bottom: 1px solid $gold-4S;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .user-list__item-name {
+    display: inline-block;
+    align-self: center;
+  }
+
+  .user-list__item-links {
+    align-self: center;
+  }
+
+  .user-list__item-active {
+    @include link-button($green);
+  }
+
+  .user-list__item-destroy {
+    @include link-button($navy);
+  }
+}
