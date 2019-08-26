@@ -7,6 +7,6 @@ class MyPagesController < ApplicationController
     @credit_payment = @user.credit_payment
     @corporate_information = @user.corporate_information if @user.CorporateUser?
     
-    render "my_pages/#{@user.type_camel}/show"
+    render "my_page/#{@user.type_camel}/show"
   end
 end

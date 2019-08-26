@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   # マイページ
   resource :my_page, only: :show
+  namespace :my_page do
+    resource :trade_log, only: [:show]
+  end
 
   # ログイン、ログアウト
   resources :sessions, only: :create
