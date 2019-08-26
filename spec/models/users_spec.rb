@@ -121,4 +121,14 @@ RSpec.describe User, type: :model do
 
     it { expect(user.trades).to eq [charge_trade, trade_with_other_user] }
   end
+
+  describe "create" do
+    let(:params) { attributes_for(:personal_user) }
+    
+    it do
+      expect(params.include?(:code)).to be_falsey
+      user = User.create(params)
+      expect(user.code).not_to be_empty
+    end
+  end
 end

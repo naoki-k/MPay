@@ -12,7 +12,7 @@ RSpec.describe AccountActivationsController, type: :controller do
       it :aggregate_failures do
         expect {
           get :edit, params: { id: token, email: email }
-        }.to change { user.reload.activated? }.from(false).to(true)
+        }.to change { user.reload.activated? }.from(false).to(true).and change { user.credit_payment.is_active }.from(false).to(true)
         expect(response).to have_http_status :redirect
         expect(flash[:success]).not_to be_empty
       end
@@ -62,7 +62,7 @@ RSpec.describe AccountActivationsController, type: :controller do
         it :aggregate_failures do
           expect {
             get :authorize, params: { id: user.id }
-          }.to change { user.reload.activated? }.from(false).to(true).and change { ActionMailer::Base.deliveries.size }.by(1)
+          }.to change { user.reload.activated? }.from(false).to(true).and change { ActionMailer::Base.deliveries.size }.by(1).and change { user.credit_payment.is_active }.from(false).to(true)
           expect(response).to have_http_status :redirect
           expect(flash[:success]).not_to be_empty
         end

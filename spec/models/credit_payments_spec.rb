@@ -22,13 +22,22 @@ RSpec.describe CreditPayment, type: :model do
     it { expect(my_payment.reload.balance).to eq increase_amount - decrease_amount }
   end
 
-  describe "#is_payable?" do
-    let(:credit_payment) { build(:credit_payment) }
-    before { allow(credit_payment).to receive(:balance).and_return(5000) }
+  describe "#payable?" do
+    context "when it isn't admin" do
+      let(:credit_payment) { build(:credit_payment) }
+      before { allow(credit_payment).to receive(:balance).and_return(5000) }
 
-    it :aggregate_failures do
-      expect(credit_payment).to be_payable(3000)
-      expect(credit_payment).not_to be_payable(10000)
+      it :aggregate_failures do
+        expect(credit_payment).to be_payable(3000)
+        expect(credit_payment).not_to be_payable(10000)
+      end
+    end
+    
+    context "when it is admin" do
+      let(:admin) { build(:admin_user) }
+      let(:credit_payment) { build(:credit_payment, user: admin) }
+
+      it { expect(credit_payment).to be_payable(10000) }
     end
   end
 end
