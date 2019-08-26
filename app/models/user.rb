@@ -74,7 +74,7 @@ class User < ApplicationRecord
   private
 
     def create_mpay_credit
-      build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: true)
+      build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: false)
     end
 
     def create_user_code
