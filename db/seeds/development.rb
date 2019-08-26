@@ -1,12 +1,13 @@
+# 手動テスト用データ
+
 admin_user = AdminUser.create!({
   tel: Faker::PhoneNumber.unique.cell_phone,
   name: "admin_user",
   password: "password",
-  email: Faker::Internet.unique.email
+  email: "admin1@example.com"
 })
 admin_user.credit_payment.update_attribute(:is_active, true)
-
-# 手動テスト用データ
+admin_user.update_attribute(:activated, true)
 
 test_user_1 = PersonalUser.create!({
   tel: Faker::PhoneNumber.unique.cell_phone,
@@ -32,6 +33,15 @@ test_user_2 = PersonalUser.create!({
     amount: 10000
   })
 end
+
+corporate_user_1 = CorporateUser.create!({
+  tel: Faker::PhoneNumber.unique.cell_phone,
+  name: Faker::Name.last_name + "株式会社",
+  password: "password",
+  email: "corporate1@example.com"
+})
+corporate_user_1.update_attribute(:activated, true)
+corporate_user_1.credit_payment.update_attribute(:is_active, true)
 
 # ---------------
 

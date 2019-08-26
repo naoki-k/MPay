@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   include Authority
-
   before_action :admin_user
 
   def index

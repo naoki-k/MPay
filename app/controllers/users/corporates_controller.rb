@@ -1,11 +1,17 @@
 class Users::CorporatesController < ApplicationController
+  include Authority
+  before_action :require_sign_in, only: :show
+  before_action -> { correct_type("CorporateUser") }, only: :show
+
   def new
     @user = CorporateUser.new
     @information = CorporateInformation.new
   end
 
   def show
-
+    @user = current_user
+    @corporate_information = @user.corporate_information
+    @credit_payment = @user.credit_payment
   end
 
   def edit
