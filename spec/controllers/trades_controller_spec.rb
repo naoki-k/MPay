@@ -2,57 +2,64 @@ require "rails_helper"
 
 RSpec.describe TradesController, type: :controller do
   describe "#new" do
-    before { get :new }
+    let(:user) { create(:personal_user) }
 
-    it :aggregate_failures do
-      expect(response).to have_http_status :ok
-      expect(response).to render_template :new
+    context "when sign in" do
+      before { get :new, session: { user_id: user.id } }
+
+      it :aggregate_failures do
+        expect(response).to have_http_status :ok
+        expect(response).to render_template :new
+      end
     end
   end
 
   describe "#confirmation" do
-    context "when correct params" do
+    context "when sign in" do
       let(:user) { create(:personal_user) }
-      before do
-        user.update_attribute(:code, "100")
-        post :confirmation, params: { confirmation: { target_user_code: "100", amount: 1000 } }
+      before { session[:user_id] = user.id }
+
+      context "when correct params" do
+        before do
+          user.update_attribute(:code, "100")
+          post :confirmation, params: { confirmation: { target_user_code: "100", amount: 1000 } }
+        end
+  
+        it { expect(response).to render_template :confirmation }
       end
-
-      it { expect(response).to render_template :confirmation }
-    end
-
-    context "when target user code is blank" do
-      before do
-        post :confirmation, params: { confirmation: { amount: 1000 } }
+  
+      context "when target user code is blank" do
+        before do
+          post :confirmation, params: { confirmation: { amount: 1000 } }
+        end
+  
+        it :aggregate_failures do
+          expect(response).to render_template :new
+          expect(flash[:danger]).not_to be_empty
+        end
       end
-
-      it :aggregate_failures do
-        expect(response).to render_template :new
-        expect(flash[:danger]).not_to be_empty
+  
+      context "when amount is blank" do
+        before do
+          user.update_attribute(:code, "100")
+          post :confirmation, params: { confirmation: { target_user_code: "100" } }
+        end
+  
+        it :aggregate_failures do
+          expect(response).to render_template :new
+          expect(flash[:danger]).not_to be_empty
+        end
       end
-    end
-
-    context "when amount is blank" do
-      let(:user) { create(:personal_user) }
-      before do
-        user.update_attribute(:code, "100")
-        post :confirmation, params: { confirmation: { target_user_code: "100" } }
-      end
-
-      it :aggregate_failures do
-        expect(response).to render_template :new
-        expect(flash[:danger]).not_to be_empty
-      end
-    end
-
-    context "when target user code is invalid" do
-      before do
-        post :confirmation, params: { confirmation: { target_user_code: "200", amount: 1000 } }
-      end
-
-      it :aggregate_failures do
-        expect(response).to render_template :new
-        expect(flash[:danger]).not_to be_empty
+  
+      context "when target user code is invalid" do
+        before do
+          post :confirmation, params: { confirmation: { target_user_code: "200", amount: 1000 } }
+        end
+  
+        it :aggregate_failures do
+          expect(response).to render_template :new
+          expect(flash[:danger]).not_to be_empty
+        end
       end
     end
   end
