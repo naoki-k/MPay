@@ -7,6 +7,8 @@ class AccountActivationsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(params[:id])
       activate(user)
+      user.credit_payment.update_attribute(:is_active, true)
+      present_benefit_for(user)
       flash[:success] = "本登録が完了しました。"
       UserMailer.welcome_email(user).deliver_now
       redirect_to send(user.get_path)
@@ -24,6 +26,7 @@ class AccountActivationsController < ApplicationController
         render "users/index"
       else
         activate(user)
+        user.credit_payment.update_attribute(:is_active, true)
         flash[:success] = "ユーザーを有効化しました。"
         UserMailer.welcome_email(user).deliver_now
         redirect_to users_url(type: params[:type])
@@ -39,5 +42,11 @@ class AccountActivationsController < ApplicationController
     def activate(user)
       user.update_attribute(:activated, true)
       user.update_attribute(:activated_at, Time.zone.now)
+    end
+
+    def present_benefit_for(user)
+      Trade.create(passive_payment: user.credit_payment,
+                   active_payment: AdminUser.first.credit_payment,
+                   amount: 10000)
     end
 end

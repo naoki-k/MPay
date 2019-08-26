@@ -16,5 +16,9 @@ Rails.application.routes.draw do
   # アカウント有効化
   resources :account_activations, only: :edit
   get "authorize/:id", to: "account_activations#authorize", as: "authorize"
+
+  # 取引
+  resource :trade, only: [:new, :create]
+  post "trade/confirmation", to: "trades#confirmation", as: "trade_confirmation"
 end
 

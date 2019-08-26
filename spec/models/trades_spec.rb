@@ -24,6 +24,13 @@ RSpec.describe Trade, type: :model do
     context "when invalid kind" do
       it { expect { build(:trade, kind: "invalid") }.to raise_error(ArgumentError) }
     end
+
+    context "when payment is inactive" do
+      let(:active_payment) { build(:credit_payment, :inactive) }
+      let(:paasive_payment) { build(:credit_payment, :inactive) }
+      it { expect(build(:trade, active_payment: active_payment)).not_to be_valid }
+      it { expect(build(:trade, passive_payment: paasive_payment)).not_to be_valid }
+    end
   end
 
   describe "#type" do

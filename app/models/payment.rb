@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  before_save :encrypt_number
+  before_create :encrypt_number
 
   has_many :active_trades, class_name: :Trade,
                            foreign_key: :active_payment_id
@@ -22,7 +22,7 @@ class Payment < ApplicationRecord
 
     def only_one_credit_each_user
       if self.class.where(type: :CreditPayment, user: user).present?
-        errors.add(:user, "already have a credit")
+        errors.add(:user, "はMPay口座を持っています。")
       end
     end
 

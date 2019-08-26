@@ -22,7 +22,7 @@ group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
   gem "spring"
   gem "web-console", ">= 3.3.0"
-  gem "faker", "1.7.3"
+  gem "faker", "2.1.2"
   gem "listen"
   gem "rails-erd"
 end
@@ -35,6 +35,6 @@ group :test do
   gem "haml_lint"
   gem "rspec-rails"
   gem "rails-controller-testing"
-  gem "faker", "1.7.3"
+  gem "faker", "2.1.2"
   gem 'database_cleaner'
 end

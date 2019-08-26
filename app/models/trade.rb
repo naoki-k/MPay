@@ -13,6 +13,7 @@ class Trade < ApplicationRecord
   validates :amount, presence: true
   validates :active_payment, presence: true
   validates :passive_payment, presence: true
+  validate :tradable
 
   def type
     if sender == receiver
@@ -25,4 +26,18 @@ class Trade < ApplicationRecord
       TYPE.slice(:with_personal_user)
     end
   end
+
+  private
+
+    def tradable
+      unless active_payment&.is_active?
+        errors.add(:active_payment, "は無効なMPay口座です。")
+      end
+      unless passive_payment&.is_active?
+        errors.add(:passive_payment, "は無効なMPay口座です。")
+      end
+      if active_payment&.CreditPayment? && !active_payment&.payable?(amount)
+        errors.add(:active_payment, "は残高を超えた支払いができません。")
+      end
+    end
 end
