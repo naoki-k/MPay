@@ -2,7 +2,7 @@ module User::Friend
   extend ActiveSupport::Concern
 
   def follow(user)
-    active_relationships.create(followed_user_id: user.id)
+    active_relationships.create(followed_user_id: user.id) unless following?(user)
   end
 
   def unfollow(user)

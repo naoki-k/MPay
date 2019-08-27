@@ -104,8 +104,10 @@ RSpec.describe UsersController, type: :controller do
     let(:user) { create(:personal_user) }
     let(:other_user) { create(:personal_user) }
 
-    
-    it { expect { user.follow(other_user) }.to change { Relationship.count }.by(1) }
+    it :aggregate_failures do
+       expect { user.follow(other_user) }.to change { Relationship.count }.by(1)
+       expect { user.follow(other_user) }.to change { Relationship.count }.by(0)
+    end
   end
 
   describe "#unfollow" do
