@@ -17,6 +17,10 @@ gem "rails-i18n"
 gem 'turbolinks'
 gem 'sass-rails'
 gem 'will_paginate',  '3.1.7'
+gem "rmagick"
+# rmagickがうまく入らないときは以下を試す
+# $ brew install imagemagick@6
+# $ PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig gem install rmagick
 
 group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
