@@ -2,7 +2,7 @@ module User::Friend
   extend ActiveSupport::Concern
 
   def follow(other_user)
-    following << other_user
+    following << other_user unless following?(other_user)
   end
 
   def unfollow(other_user)
@@ -15,5 +15,9 @@ module User::Friend
 
   def followed?(other_user)
     followers.include?(other_user)
+  end
+
+  def friends
+    following && followers
   end
 end

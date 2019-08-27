@@ -128,4 +128,15 @@ RSpec.describe UsersController, type: :controller do
       expect(user).not_to be_following(unfollowed_user)
     end
   end
+
+  describe "#friends" do
+    let(:user) { create(:personal_user) }
+    let(:other_user) { create(:personal_user) }
+    before do
+      user.follow(other_user)
+      other_user.follow(user)
+    end
+
+    it { expect(user.friends).to include other_user }
+  end
 end
