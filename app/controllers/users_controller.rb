@@ -25,10 +25,11 @@ class UsersController < ApplicationController
     else
       if @user
         @corporate_information = @user.corporate_information if @user.CorporateUser?
-        render "users/#{@user.type_camel}/show"
+        render "users/#{@user.group}/show"
       else
         redirect_to "/"
       end
     end
   end
 end
+

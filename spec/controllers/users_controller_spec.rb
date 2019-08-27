@@ -74,7 +74,7 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/admin_user/show"
+          expect(response).to render_template "users/admins/show"
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/corporate_user/show"
+          expect(response).to render_template "users/corporates/show"
         end
       end
 
@@ -94,9 +94,49 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/personal_user/show"
+          expect(response).to render_template "users/personals/show"
         end
       end
     end
+  end
+
+  describe "#follow" do
+    let(:user) { create(:personal_user) }
+    let(:other_user) { create(:personal_user) }
+
+    it :aggregate_failures do
+       expect { user.follow(other_user) }.to change { Relationship.count }.by(1)
+    end
+  end
+
+  describe "#unfollow" do
+    let(:user) { create(:personal_user) }
+    let(:other_user) { create(:personal_user) }
+    before { user.follow(other_user) }
+
+    it { expect { user.unfollow(other_user) }.to change { Relationship.count }.by(-1) }
+  end
+
+  describe "#following?" do
+    let(:user) { create(:personal_user) }
+    let(:followed_user) { create(:personal_user) }
+    let(:unfollowed_user) { create(:personal_user) }
+    before { user.follow(followed_user) }
+
+    it :aggregate_failures do
+      expect(user).to be_following(followed_user)
+      expect(user).not_to be_following(unfollowed_user)
+    end
+  end
+
+  describe "#friends" do
+    let(:user) { create(:personal_user) }
+    let(:other_user) { create(:personal_user) }
+    before do
+      user.follow(other_user)
+      other_user.follow(user)
+    end
+
+    it { expect(user.friends).to include other_user }
   end
 end

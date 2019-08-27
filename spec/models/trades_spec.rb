@@ -48,7 +48,7 @@ RSpec.describe Trade, type: :model do
       let(:active_payment) { build(:bank_payment, user: user) }
       let(:passive_payment) { build(:credit_payment, user: user) }
 
-      it { is_expected.to eq charge: "入金" } 
+      it { is_expected.to eq :charge } 
     end
 
     context "when sender is admin" do
@@ -57,7 +57,7 @@ RSpec.describe Trade, type: :model do
       let(:active_payment) { build(:payment, user: admin_user) }
       let(:passive_payment) { build(:payment, user: user) }
 
-      it { is_expected.to eq from_mpay: "MPayからの支払い" }
+      it { is_expected.to eq :from_mpay }
     end
 
     context "when sender isn't receiver and sender isn't admin" do
@@ -67,7 +67,7 @@ RSpec.describe Trade, type: :model do
         let(:active_payment) { build(:payment, user: user) }
         let(:passive_payment) { build(:payment, user: corporate_user) }
   
-        it { is_expected.to eq to_corporate: "法人への支払い" }
+        it { is_expected.to eq :to_corporate }
       end
   
       context "when receiver is personal" do
@@ -76,7 +76,7 @@ RSpec.describe Trade, type: :model do
         let(:active_payment) { build(:payment, user: user) }
         let(:passive_payment) { build(:payment, user: personal_user) }
   
-        it { is_expected.to eq with_personal_user: "ユーザー間取引" }
+        it { is_expected.to eq :with_personal_user }
       end
     end
   end

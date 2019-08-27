@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_055141) do
+ActiveRecord::Schema.define(version: 2019_08_27_033757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,12 +55,13 @@ ActiveRecord::Schema.define(version: 2019_08_23_055141) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "following_user_id", null: false
-    t.bigint "followed_user_id", null: false
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_user_id"], name: "index_relationships_on_followed_user_id"
-    t.index ["following_user_id"], name: "index_relationships_on_following_user_id"
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "trades", force: :cascade do |t|
@@ -98,8 +99,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_055141) do
   add_foreign_key "corporate_informations", "users"
   add_foreign_key "payments", "banks"
   add_foreign_key "payments", "users"
-  add_foreign_key "relationships", "users", column: "followed_user_id"
-  add_foreign_key "relationships", "users", column: "following_user_id"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "trades", "billings"
   add_foreign_key "trades", "payments", column: "active_payment_id"
   add_foreign_key "trades", "payments", column: "passive_payment_id"
