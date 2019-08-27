@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   end
 
   # マイページ
-  resource :my_page, only: :show
-  namespace :my_page do
-    resource :trade_log, only: [:show]
+  resource :my_page, only: :show do
+    scope module: :my_page do
+      resource :trade_log, only: [:show]
+    end
   end
 
   # ログイン、ログアウト
