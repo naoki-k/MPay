@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Friend
+  include User::Friend
 
   before_validation :create_mpay_credit, on: :create
   after_create :create_user_code
