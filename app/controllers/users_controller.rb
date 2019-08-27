@@ -20,12 +20,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    # current_user == @user の時、my_pageに飛ばす処理をあとで書きます。
-    if @user
-      @corporate_information = @user.corporate_information if @user.CorporateUser?
-      render "users/#{@user.type_camel}/show"
+    if @user == current_user
+      redirect_to my_page_url
     else
-      redirect_to "/"
+      if @user
+        @corporate_information = @user.corporate_information if @user.CorporateUser?
+        render "users/#{@user.type_camel}/show"
+      else
+        redirect_to "/"
+      end
     end
   end
 end

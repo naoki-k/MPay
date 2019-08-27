@@ -62,6 +62,12 @@ RSpec.describe UsersController, type: :controller do
       let(:user) { create(:personal_user) }
       before { session[:user_id] = user.id }
 
+      context "when show current user" do
+        before { get :show, params: { id: user.id } }
+
+        it { expect(response).to redirect_to my_page_url }
+      end
+
       context "when show admin user" do
         let(:admin) { create(:admin_user)}
         before { get :show, params: { id: admin.id } }
