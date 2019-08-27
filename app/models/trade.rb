@@ -1,7 +1,4 @@
 class Trade < ApplicationRecord
-  TYPE = { charge: "入金", from_mpay: "MPayからの支払い",
-           to_corporate: "法人への支払い", with_personal_user: "ユーザー間取引" }.freeze
-
   belongs_to :active_payment, class_name: :Payment
   belongs_to :passive_payment, class_name: :Payment
   has_one :sender, through: :active_payment, source: :user
@@ -16,14 +13,24 @@ class Trade < ApplicationRecord
   validate :tradable
 
   def type
-    if sender == receiver
-      TYPE.slice(:charge)
-    elsif sender.AdminUser?
-      TYPE.slice(:from_mpay)
-    elsif receiver.CorporateUser?
-      TYPE.slice(:to_corporate)
-    elsif receiver.PersonalUser?
-      TYPE.slice(:with_personal_user)
+    @type ||=
+      if sender == receiver
+        :charge
+      elsif sender.AdminUser?
+        :from_mpay
+      elsif receiver.CorporateUser?
+        :to_corporate
+      elsif receiver.PersonalUser?
+        :with_personal_user
+      end
+  end
+
+  def type_ja
+    case type
+    when :charge then "入金"
+    when :from_mpay then "MPayからの支払い"
+    when :to_corporate then "法人への支払い"
+    when :with_personal_user then "ユーザー間取引"
     end
   end
 
