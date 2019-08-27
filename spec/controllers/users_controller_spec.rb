@@ -74,7 +74,7 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/admin_user/show"
+          expect(response).to render_template "users/admins/show"
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/corporate_user/show"
+          expect(response).to render_template "users/corporates/show"
         end
       end
 
@@ -94,7 +94,7 @@ RSpec.describe UsersController, type: :controller do
 
         it :aggregate_failures do
           expect(response).to have_http_status :ok
-          expect(response).to render_template "users/personal_user/show"
+          expect(response).to render_template "users/personals/show"
         end
       end
     end
@@ -106,7 +106,6 @@ RSpec.describe UsersController, type: :controller do
 
     it :aggregate_failures do
        expect { user.follow(other_user) }.to change { Relationship.count }.by(1)
-       expect { user.follow(other_user) }.to change { Relationship.count }.by(0)
     end
   end
 

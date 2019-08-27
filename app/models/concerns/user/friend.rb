@@ -1,15 +1,19 @@
 module User::Friend
   extend ActiveSupport::Concern
 
-  def follow(user)
-    active_relationships.create(followed_user_id: user.id) unless following?(user)
+  def follow(other_user)
+    following << other_user
   end
 
-  def unfollow(user)
-    active_relationships.find_by(followed_user_id: user.id)&.destroy
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id)&.destroy
   end
 
-  def following?(user)
-    active_relationships.find_by(followed_user_id: user.id)
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  def followed?(other_user)
+    followers.include?(other_user)
   end
 end

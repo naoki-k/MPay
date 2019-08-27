@@ -14,7 +14,7 @@ RSpec.describe MyPagesController, type: :controller do
 
       it :aggregate_failures do
         expect(response).to have_http_status :ok
-        expect(response).to render_template "my_page/admin_user/show"
+        expect(response).to render_template "my_pages/admins/show"
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe MyPagesController, type: :controller do
 
       it :aggregate_failures do
         expect(response).to have_http_status :ok
-        expect(response).to render_template "my_page/corporate_user/show"
+        expect(response).to render_template "my_pages/corporates/show"
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe MyPagesController, type: :controller do
 
       it :aggregate_failures do
         expect(response).to have_http_status :ok
-        expect(response).to render_template "my_page/personal_user/show"
+        expect(response).to render_template "my_pages/personals/show"
       end
     end
   end

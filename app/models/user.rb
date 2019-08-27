@@ -10,13 +10,13 @@ class User < ApplicationRecord
   has_many :active_trades, through: :payments
   has_many :passive_trades, through: :payments
   has_many :active_relationships, class_name: :Relationship,
-                                  foreign_key: :following_user_id,
+                                  foreign_key: :follower_id,
                                   dependent: :destroy
-  has_many :following_users, through: :active_relationships
   has_many :passive_relationships, class_name: :Relationship,
-                                   foreign_key: :followed_user_id,
+                                   foreign_key: :followed_id,
                                    dependent: :destroy
-  has_many :followed_users, through: :passive_relationships
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships
   has_many :active_billings, class_name: :Billing,
                               foreign_key: :sender_id,
                               dependent: :destroy
@@ -61,11 +61,11 @@ class User < ApplicationRecord
     end
   end
 
-  def type_camel
+  def group
     case type
-    when "AdminUser" then "admin_user"
-    when "CorporateUser" then "corporate_user"
-    when "PersonalUser" then "personal_user"
+    when "AdminUser" then "admins"
+    when "CorporateUser" then "corporates"
+    when "PersonalUser" then "personals"
     end
   end
 

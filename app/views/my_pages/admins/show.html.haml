@@ -1,0 +1,18 @@
+%div
+  名前:
+  = @user.name
+%div
+  メールアドレス:
+  = @user.email
+%div
+  TEL:
+  = @user.tel
+%div
+  ユーザーコード:
+  = @user.code
+%div
+  Mpayクレカ番号:
+  = @credit_payment.decrypted_number
+%div
+  残高:
+  = @credit_payment.balance
