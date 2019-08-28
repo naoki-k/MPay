@@ -1,7 +1,7 @@
 class ProfileImage < ApplicationRecord
-  include ProfileImageDelegator
+  include ProfileImage::Handler
 
-  before_save proc self.image = to_base64(image)
+  before_save Proc.new { self.image = to_base64(self.image) }
 
   belongs_to :user
 
