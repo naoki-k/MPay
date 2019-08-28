@@ -1,5 +1,5 @@
 .trade-form
-  .trade-form__title 送金
+  .trade-form__title 送金手続き
 
   %ol.trade-form__status-bar
   %li.trade-form__status-bar-item-wrapper{ "aria-current": "step" }
@@ -16,16 +16,20 @@
       %span.trade-form__status-bar-step-number 3
       %span.trade-form__status-bar-step-text 完了
 
-  = form_for(:confirmation, url: trade_confirmation_path) do |f|
-    = render "shared/error_messages", object: @trade
+  .trade-form__items
+    = form_for(:confirmation, url: trade_confirmation_path) do |f|
+      = render "shared/error_messages", object: @trade
 
-    .trade-form__item-container
-      = f.label t("views.trade.amount"), class: ".trade-form__label"
-      = f.text_field :amount, class: ".trade-form__field"
+      .trade-form__item-container
+        = f.label t("views.trade.amount"), class: "trade-form__label"
+        .trade-form__field-amount-container
+          = f.text_field :amount, class: "trade-form__field-amount"
+          %span.trade-form__amount-label
+            円
 
-    .trade-form__item-container
-      = f.label t("views.trade.target_user_code"), class: ".trade-form__label"
-      = f.text_field :target_user_code, class: ".trade-form__field"
+      .trade-form__item-container
+        = f.label t("views.trade.target_user_code"), class: "trade-form__label"
+        = f.text_field :target_user_code, class: "trade-form__field-usercode"
 
-    .trade-form__button-container
-      = f.submit "確認画面へ", class: "trade-form__button"
+      .trade-form__button-container
+        = f.submit "確認画面へ", class: "trade-form__button"
