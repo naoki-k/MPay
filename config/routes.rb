@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :users do
     resources :admins, :corporates, only: [:new, :create]
     resources :corporates, only: [:new, :create, :update, :edit]
-    resources :personals, only: [:new, :create, :update, :edit], path: ""
+    resources :personals, only: [:new, :create, :update, :edit]
   end
 
   # マイページ

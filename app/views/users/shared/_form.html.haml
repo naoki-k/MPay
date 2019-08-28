@@ -1,6 +1,6 @@
 .signup-form
   // TODO: send使わないようにしたい。
-  = form_for(user, url: send(user.send_path)) do |f|
+  = form_for(user, url: send(user.send_path), html: { multipart: true }) do |f|
     = render "shared/error_messages", object: f.object
     - if user.CorporateUser?
       = render "shared/error_messages", object: information
@@ -40,6 +40,8 @@
           .signup-form__field-container
             %span.material-icons.signup-form__icon comment
             = info.text_field :detail, type: :text, placeholder: "備考（任意）", class: "signup-form__field"
+
+      = file_field_tag :profile_image, accept: "image/jpg,image/jpeg,image/png"
 
       .signup-form__button-container
         = f.submit "登録", class: "signup-form__button"

@@ -1,9 +1,11 @@
 class Users::PersonalsController < ApplicationController
+  include ProfileImageUploader
+
   def new
     @user = PersonalUser.new
   end
 
-  def edit
+ def edit
 
   end
 
