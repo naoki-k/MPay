@@ -5,6 +5,7 @@ class MyPagesController < ApplicationController
   def show
     @user = current_user
     @credit_payment = @user.credit_payment
+    @image = @user.profile_image&.image
     @corporate_information = @user.corporate_information if @user.CorporateUser?
     
     render "my_pages/#{@user.group}/show"

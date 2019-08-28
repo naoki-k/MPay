@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+    @image = @user.profile_image&.image
     if @user == current_user
       redirect_to my_page_url
     else
