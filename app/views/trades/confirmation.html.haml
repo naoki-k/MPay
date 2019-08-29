@@ -1,6 +1,44 @@
-= form_for(@trade, url: trade_path) do |f|
-  = @amount
-  = f.hidden_field :amount, value: @amount
-  = @user.name
-  = f.hidden_field :target_user_id, value: @user.id
-  = f.submit "確定する"
+.trade-form
+  .trade-form__title 送金内容確認
+
+  %ol.trade-form__status-bar
+  %li.trade-form__status-bar-item-wrapper
+    .trade-form__status-bar-item
+      %span.trade-form__status-bar-step-number 1
+      %span.trade-form__status-bar-step-text 入力
+  %li.trade-form__status-bar-item-wrapper{ "aria-current": "step" }
+    .trade-form__status-bar-item
+      %span.trade-form__status-bar-step-number 2
+      %span.trade-form__status-bar-step-text 確認
+  %li.trade-form__status-bar-item-wrapper
+    .trade-form__status-bar-item
+      %span.trade-form__status-bar-step-number 3
+      %span.trade-form__status-bar-step-text 完了
+
+  .trade-confirmation
+    = form_for(@trade, url: trade_path) do |f|
+      .trade-confirmation__items
+        .trade-confirmation__item
+          %span.trade-confirmation__post-label
+            = @amount
+          = f.hidden_field :amount, value: @amount
+
+          %span.trade-confirmation__text
+            円を
+
+        .trade-confirmation__item
+          %span.trade-confirmation__post-label
+            = @user.name
+          = f.hidden_field :target_user_id, value: @user.id
+
+          %span.trade-confirmation__text
+            さんに
+
+        .trade-confirmation__item
+          .trade-confirmation__text
+            送金します。
+
+      .trade-confirmation__button-container
+        .trade-confirmation__text-alert
+          ※内容に間違いがなければ確定ボタンを押してください。
+        = f.submit "確定する", class: "trade-confirmation__button"
