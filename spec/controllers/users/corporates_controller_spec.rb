@@ -35,5 +35,32 @@ RSpec.describe Users::CorporatesController, type: :controller do
         expect(flash[:danger]).not_to be_empty
       end
     end
+
+    context "when register with profile image" do
+      context "when valid image" do
+        let(:params) { attributes_for(:corporate_user, :with_confirmation) }
+        let(:information_params) { attributes_for(:corporate_information) }
+        let(:image) { fixture_file_upload("spec/factories/images/admin_user.png") }
+
+        it do
+          expect {
+            post :create, params: { corporate_user: {  **params, corporate_information: information_params }, profile_image: image }
+          }.to change { ProfileImage.count }.by(1)
+        end
+      end
+
+      context "when image is invalid file" do
+        let(:params) { attributes_for(:corporate_user, :with_confirmation) }
+        let(:information_params) { attributes_for(:corporate_information) }
+        let(:invalid_file) { fixture_file_upload("spec/factories/images/empty.csv") }
+
+        it :aggregate_failures do
+          expect {
+            post :create, params: { corporate_user: {  **params, corporate_information: information_params }, profile_image: invalid_file }
+          }.to change {User.count}.by(1).and change { ProfileImage.count }.by(0)
+          expect(flash[:info]).not_to be_empty
+        end
+      end
+    end
   end
 end

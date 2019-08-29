@@ -21,11 +21,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    @image = @user.profile_image&.image
     if @user == current_user
       redirect_to my_page_url
     else
       if @user
+        @image = @user.profile_image&.image
         @corporate_information = @user.corporate_information if @user.CorporateUser?
         render "users/#{@user.group}/show"
       else
@@ -34,4 +34,3 @@ class UsersController < ApplicationController
     end
   end
 end
-
