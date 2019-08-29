@@ -34,5 +34,30 @@ RSpec.describe Users::PersonalsController, type: :controller do
         expect(flash[:danger]).not_to be_empty
       end
     end
+
+    context "when register with profile image" do
+      context "when valid image" do
+        let(:params) { attributes_for(:personal_user, :with_confirmation) }
+        let(:image) { fixture_file_upload("spec/factories/images/admin_user.png") }
+
+        it do
+          expect {
+            post :create, params: { personal_user: params, profile_image: image }
+          }.to change { ProfileImage.count }.by(1)
+        end
+      end
+
+      context "when image is invalid file" do
+        let(:params) { attributes_for(:personal_user, :with_confirmation) }
+        let(:invalid_file) { fixture_file_upload("spec/factories/images/empty.csv") }
+
+        it :aggregate_failures do
+          expect {
+            post :create, params: { personal_user: params, profile_image: invalid_file }
+          }.to change {User.count}.by(1).and change { ProfileImage.count }.by(0)
+          expect(flash[:info]).not_to be_empty
+        end
+      end
+    end
   end
 end

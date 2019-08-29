@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include Authority
+  
   before_action :admin_user, only: [:index, :destroy]
   before_action :require_sign_in, only: :show
 
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
       redirect_to my_page_url
     else
       if @user
+        @image = @user.profile_image&.image
         @corporate_information = @user.corporate_information if @user.CorporateUser?
         render "users/#{@user.group}/show"
       else
@@ -32,4 +34,3 @@ class UsersController < ApplicationController
     end
   end
 end
-

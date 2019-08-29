@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :passive_billings, class_name: :Billing,
                               foreign_key: :receiver_id,
                               dependent: :destroy
+  has_one :profile_image
 
   enum type: [:AdminUser, :PersonalUser, :CorporateUser]
 

@@ -9,7 +9,9 @@ class Users::AdminsController < ApplicationController
 
   def create
     @user = AdminUser.new(user_params)
+    @image = @user.build_profile_image(image: params[:profile_image]&.read)
     if @user.save
+      flash[:info] = "プロフィール画像の設定に失敗しました" if params[:profile_image] && !@image.save
       UserMailer.account_activate_request(@user).deliver_now
       flash[:success] = "アカウント作成の申請をしました。"
       redirect_to new_users_admin_path

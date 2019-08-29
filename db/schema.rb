@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_033757) do
+ActiveRecord::Schema.define(version: 2019_08_27_095119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 2019_08_27_033757) do
     t.index ["number"], name: "index_payments_on_number", unique: true
     t.index ["type"], name: "index_payments_on_type"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "profile_images", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profile_images_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -99,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_033757) do
   add_foreign_key "corporate_informations", "users"
   add_foreign_key "payments", "banks"
   add_foreign_key "payments", "users"
+  add_foreign_key "profile_images", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "trades", "billings"

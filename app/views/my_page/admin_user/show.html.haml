@@ -1,6 +1,9 @@
 %div
   名前:
   = @user.name
+- if @image
+  %div
+    = image_tag "data:image/jpeg;base64,#{@image}"
 %div
   メールアドレス:
   = @user.email
