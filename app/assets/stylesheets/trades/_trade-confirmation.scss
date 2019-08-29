@@ -1,0 +1,61 @@
+@import "shared/colors";
+
+.trade-confirmation {
+  .trade-confirmation__text-alert {
+    color: $pink;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .trade-confirmation__button-submit-container {
+    text-align: center;
+  }
+
+  .trade-confirmation__button-submit {
+    width: 150px;
+    height: 40px;
+    background-color: $pink;
+    color: $white;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 40px;
+  }
+
+  .trade-confirmation__button-return-container {
+    margin: 0 180px;
+    text-align: center;
+  }
+
+  .trade-confirmation__button-return {
+    text-decoration: none;
+    display: inline-block;
+    width: 140px;
+    height: 30px;
+    font-size: 10px;
+    line-height: 30px;
+    vertical-align: middle;
+    background-color: $navy-4S;
+    color: $navy;
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 40px;
+  }
+
+  .trade-confirmation__post-label {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  .trade-confirmation__text {
+    font-size: 22px;
+  }
+
+  .trade-confirmation__items {
+    margin:  40px 80px;
+  }
+
+  .trade-confirmation__item {
+    margin:  0 0 10px;
+  }
+}

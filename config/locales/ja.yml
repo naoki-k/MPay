@@ -27,3 +27,7 @@ ja:
       corporate_information:
         address: 住所
         detail: 詳細
+  views:
+    trade:
+      amount: 取引金額
+      target_user_code: 送金先のユーザーコード
