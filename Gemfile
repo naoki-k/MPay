@@ -21,6 +21,7 @@ gem "rmagick"
 # rmagickがうまく入らないときは以下を試す
 # $ brew install imagemagick@6
 # $ PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig gem install rmagick
+gem 'webpacker'
 
 group :development do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw], group: :test
