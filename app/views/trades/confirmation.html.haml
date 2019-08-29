@@ -38,7 +38,13 @@
           .trade-confirmation__text
             送金します。
 
-      .trade-confirmation__button-container
+      .trade-confirmation__button-return-container
+        -# .trade-confirmation__text-alert
+        -#   ※内容に間違いがなければ確定ボタンを押してください。
+        = button_to "<< 送金内容を変更する", new_trade_path,
+          class: "trade-confirmation__button-return"
+
+      .trade-confirmation__button-submit-container
         .trade-confirmation__text-alert
           ※内容に間違いがなければ確定ボタンを押してください。
-        = f.submit "確定する", class: "trade-confirmation__button"
+        = f.submit "確定する", class: "trade-confirmation__button-submit"

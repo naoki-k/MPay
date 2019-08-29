@@ -21,7 +21,7 @@
       content: '';
       position: absolute;
       top: 0px;
-      right: -2px;
+      right: -12px;
       border-top: 18.2px solid transparent;
       border-bottom: 18.2px solid transparent;
       border-left: 15px solid $gold-4S;
@@ -32,9 +32,9 @@
       content: '';
       position: absolute;
       top: 0px;
-      right: -4px;
-      border-top: 18.2px solid $gold-4S;
-      border-bottom: 18.2px solid $gold-4S;
+      right: -14px;
+      border-top: 18.2px solid transparent;
+      border-bottom: 18.2px solid transparent;
       border-left: 15px solid $white;
       z-index: 1;
     }

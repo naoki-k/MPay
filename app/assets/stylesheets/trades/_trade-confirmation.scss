@@ -7,11 +7,11 @@
     margin-bottom: 10px;
   }
 
-  .trade-confirmation__button-container {
+  .trade-confirmation__button-submit-container {
     text-align: center;
   }
 
-  .trade-confirmation__button {
+  .trade-confirmation__button-submit {
     width: 150px;
     height: 40px;
     background-color: $pink;
@@ -19,6 +19,21 @@
     border-style: none;
     border-radius: 5px;
     font-size: 12px;
+    margin-bottom: 40px;
+  }
+
+  .trade-confirmation__button-return-container {
+    text-align: center;
+  }
+
+  .trade-confirmation__button-return {
+    width: 150px;
+    height: 30px;
+    background-color: $navy-4S;
+    // color: $white;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 10px;
     margin-bottom: 40px;
   }
 
