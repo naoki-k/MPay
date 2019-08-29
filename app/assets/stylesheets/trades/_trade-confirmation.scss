@@ -23,17 +23,22 @@
   }
 
   .trade-confirmation__button-return-container {
+    margin: 0 180px;
     text-align: center;
   }
 
   .trade-confirmation__button-return {
-    width: 150px;
+    text-decoration: none;
+    display: block;
+    width: 140px;
     height: 30px;
+    font-size: 10px;
+    line-height: 30px;
+    vertical-align: middle;
     background-color: $navy-4S;
-    // color: $white;
+    color: $navy;
     border-style: none;
     border-radius: 5px;
-    font-size: 10px;
     margin-bottom: 40px;
   }
 
