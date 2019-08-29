@@ -16,37 +16,42 @@
   }
 
   .trade-form__status-bar-item-wrapper {
-    display: inline-block;
-    text-decoration: none;
-    background-color: $gold-4S;
-    position: relative;
-    margin-right: -5px;
+    align-items: center;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      border-top: 18.2px solid transparent;
+      border-bottom: 18.2px solid transparent;
+      border-left: 15px solid $gold-4S;
+      z-index: 2;
+    }
 
-    &[aria-current="step"] {
-      background-color: $gold-2S;
-      color: $white;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: -3px;
+      border-top: 18.2px solid $gold-4S;
+      border-bottom: 18.2px solid $gold-4S;
+      border-left: 15px solid $white;
+      z-index: 1;
+    }
+  }
 
-      &:after {
-        content: '';
-        position: absolute;
-        width: 0px;
-        height: 0px;
-        top: 0px;
-        right: 0px;
-        border-top: 17.82px solid $gold-4S;
-        border-bottom: 17.82px solid $gold-4S;
-        border-left: 17.82px solid $gold-2S;
-        margin-left: 150px;
-      }
+  .trade-form__status-bar-item-wrapper:last-of-type {
+    &:after {
+      content: none;
+    }
 
-      .trade-form__status-bar-step-text {
-        color: $white;
-      }
+    &:before {
+      content: none;
     }
   }
 
   .trade-form__status-bar-item {
-    padding: 5px 11px 5px 20px;
+    padding: 5px 26px 5px 20px;
   }
 
   .trade-form__status-bar-step-number {
@@ -62,14 +67,8 @@
 
   .trade-form__status-bar-step-text {
     color: $gold-1S;
-    padding: 0 55px 0 20px;
+    padding: 0 55px 0 10px;
     vertical-align: middle;
-  }
-
-  .trade-form__right-arrow {
-    color: $white;
-    background-color: $gold-4S;
-    font-weight: bold;
   }
 
   .trade-form__item-container {
@@ -129,5 +128,26 @@
 
   .trade-form__items {
     margin: 40px 30px 50px;
+  }
+
+  .trade-form__status-bar-item-wrapper {
+    display: inline-block;
+    text-decoration: none;
+    background-color: $gold-4S;
+    position: relative;
+    margin-right: -5px;
+
+    &[aria-current="step"] {
+      background-color: $gold-2S;
+      color: $white;
+
+      .trade-form__status-bar-step-text {
+        color: $white;
+      }
+
+      &:after {
+        border-left-color: $gold-2S;
+      }
+    }
   }
 }
