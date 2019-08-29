@@ -26,8 +26,8 @@ describe ProfileImage::Handler do
     it :aggregate_failures do
       expect(original_blob.bytesize).to be > test_class::MAX_BYTE_SIZE
       expect(formatted_blob.bytesize).to be < test_class::MAX_BYTE_SIZE
-      expect(formatted_image.columns).to eq 300
-      expect(formatted_image.rows).to eq 300
+      expect(formatted_image.columns).to eq test_class::IMAGE_SIZE_X
+      expect(formatted_image.rows).to eq test_class::IMAGE_SIZE_Y
       expect(formatted_image.format).to eq "JPEG"
     end
   end
