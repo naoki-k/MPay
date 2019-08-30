@@ -1,9 +1,9 @@
 .signup-form
   // TODO: send使わないようにしたい。
-  = form_for(user, url: send(user.send_path), html: { multipart: true }) do |f|
-    = render "shared/error_messages", object: f.object
-    - if user.CorporateUser?
-      = render "shared/error_messages", object: information
+  = form_for(user, url: send(user.send_path), html: { multipart: true }, builder: FormHelper::ValidationFormBuilder) do |f|
+    -# = render "shared/error_messages", object: f.object
+    -# - if user.CorporateUser?
+      -# = render "shared/error_messages", object: information
 
     .signup-form__main
       .signup-form__field-container
