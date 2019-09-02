@@ -40,8 +40,7 @@ class AccountActivationsController < ApplicationController
   private
 
     def activate(user)
-      user.update_attribute(:activated, true)
-      user.update_attribute(:activated_at, Time.zone.now)
+      user.account_activation.update_attribute(:activated, true)
     end
 
     def present_benefit_for(user)

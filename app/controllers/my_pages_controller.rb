@@ -8,6 +8,6 @@ class MyPagesController < ApplicationController
     @image = @user.profile_image&.image
     @corporate_information = @user.corporate_information if @user.CorporateUser?
     
-    render "my_pages/#{@user.group}/show"
+    render "my_page/#{@user.group}/show"
   end
 end

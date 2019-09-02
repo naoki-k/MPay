@@ -17,7 +17,7 @@ RSpec.describe SessionsController, type: :controller do
 
     context "when sign in success" do
       before do
-        user.update_attribute(:activated, true)
+        user.account_activation.update_attribute(:activated, true)
         post :create, params: { session: { email: email, password: password } }
       end
 

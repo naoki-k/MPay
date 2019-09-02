@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_095119) do
+ActiveRecord::Schema.define(version: 2019_09_02_095205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_activations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "activated", default: false, null: false
+    t.string "digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_account_activations_on_user_id"
+  end
 
   create_table "banks", force: :cascade do |t|
     t.string "name", limit: 25, null: false
@@ -92,9 +101,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_095119) do
     t.string "email", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "activation_digest"
-    t.boolean "activated", default: false
-    t.datetime "activated_at"
     t.string "code", limit: 25
     t.index ["code"], name: "index_users_on_code", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -102,6 +108,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_095119) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  add_foreign_key "account_activations", "users"
   add_foreign_key "billings", "users", column: "receiver_id"
   add_foreign_key "billings", "users", column: "sender_id"
   add_foreign_key "corporate_informations", "users"
