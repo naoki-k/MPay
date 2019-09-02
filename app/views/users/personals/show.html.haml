@@ -5,6 +5,7 @@
   - if @image
     %div
       = image_tag "data:image/jpeg;base64,#{@image}"
-  %div
+  %div{ data: { controller: "clipboard" } }
     ユーザーコード:
-    = @user.code
+    %input{ value: @user.code, data: { target: "clipboard.source" }, readonly: true }
+    = button_tag "copy", type: :button, data: { action: "clipboard#copy" }

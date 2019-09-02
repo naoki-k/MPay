@@ -1,0 +1,1 @@
+document.execCommand = jest.fn()
