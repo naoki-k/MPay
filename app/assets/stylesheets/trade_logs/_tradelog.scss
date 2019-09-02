@@ -1,0 +1,17 @@
+@import "shared/colors";
+
+.tradelog {
+  width: 600px;
+  margin: 0 auto;
+
+  .tradelog__item-container{
+    margin: 5px 10px;
+  }
+  .tradelog__status-label {
+    width: 140px;
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: $green-3S;
+    color: $navy-1S;
+  }
+}

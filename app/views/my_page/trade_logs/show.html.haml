@@ -1,7 +1,12 @@
-- @trades&.each do |trade|
-  %div
-    = trade.type_ja
-    = trade.sender.name
-    = trade.receiver.name
-    = "#{trade.amount}円"
-    = trade.created_at.strftime("%Y-%m-%d %H:%M:%S")
+.tradelog
+  %h1 取引履歴
+  .tradelog__items
+    - @trades&.each do |trade|
+      .tradelog__item-container
+        %div
+          %span.tradelog__status-label
+            = trade.type_ja
+          = trade.sender.name
+          = trade.receiver.name
+          = "#{trade.amount}円"
+          = trade.created_at.strftime("%Y-%m-%d %H:%M:%S")
