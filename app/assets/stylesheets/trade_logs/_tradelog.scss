@@ -4,6 +4,10 @@
   width: 600px;
   margin: 0 auto;
 
+  .tradelog__title{
+    border-bottom: 1px solid $gold;
+  }
+
   .tradelog__item-container{
     margin: 5px 10px;
   }
