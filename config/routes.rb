@@ -12,8 +12,11 @@ Rails.application.routes.draw do
   resource :my_page, only: :show do
     scope module: :my_page do
       resource :trade_log, only: [:show]
+      resource :friend_list, only: [:show]
     end
   end
+
+  post "user_search", to: "my_page/friend_lists#search", defaults: { format: :json }
 
   # ログイン、ログアウト
   resources :sessions, only: :create
