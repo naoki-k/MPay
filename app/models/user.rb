@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include User::Friend
 
   before_validation :create_mpay_credit, on: :create
+  before_validation :create_account_activation, on: :create
   after_create :create_user_code
 
   has_many :payments, dependent: :destroy
@@ -23,7 +24,8 @@ class User < ApplicationRecord
   has_many :passive_billings, class_name: :Billing,
                               foreign_key: :receiver_id,
                               dependent: :destroy
-  has_one :profile_image
+  has_one :profile_image, dependent: :destroy
+  has_one :account_activation, dependent: :destroy
 
   enum type: [:AdminUser, :PersonalUser, :CorporateUser]
 
@@ -34,9 +36,11 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :password, presence: true, length: { in: 6..30 }
 
-  attr_accessor :activation_token
-
   has_secure_password
+
+  def activated?
+    account_activation&.activated?
+  end
 
   def tradable?
     credit_payment.is_active || bank_payments&.tradable.present?
@@ -71,13 +75,17 @@ class User < ApplicationRecord
   end
 
   def authenticated?(token)
-    BCrypt::Password.new(activation_digest).is_password?(token)
+    BCrypt::Password.new(account_activation.digest).is_password?(token)
   end
 
   private
 
     def create_mpay_credit
       build_credit_payment(number: SecureRandom.alphanumeric(16), is_active: false)
+    end
+
+    def create_account_activation
+      build_account_activation()
     end
 
     def create_user_code
