@@ -1,21 +1,29 @@
 @import "shared/colors";
 
 .tradelog {
-  width: 600px;
+  width: 700px;
   margin: 0 auto;
 
   .tradelog__title{
-    border-bottom: 1px solid $gold;
+    border-bottom: 3px solid $gold;
+    margin-bottom: 10px;
   }
 
   .tradelog__item-container{
-    margin: 5px 10px;
+    display: block;
+    width: 700px;
+    margin: 5px 0;
+    border-bottom: 1px solid $gold-3S;
   }
+
   .tradelog__status-label {
-    width: 140px;
     display: inline-block;
     padding: 3px 8px;
     background-color: $green-3S;
     color: $navy-1S;
+  }
+
+  .tradelog__td {
+    margin-right: 10px;
   }
 }
