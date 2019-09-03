@@ -4,11 +4,21 @@
     %tbody.tradelog__items
       - @trades&.each do |trade|
         %tr.tradelog__item-container
-          %td.tradelog__td.tradelog__name-label
-            = trade.sender.name
-          %td.tradelog__td.tradelog__name-label
-            = trade.receiver.name
-          %td.tradelog__td.tradelog__amount-label
-            = "¥ #{trade.amount}"
+          - if sender?(trade)
+            %td.tradelog__td.tradelog__name-label
+              = trade.receiver.name
+          - else
+            %td.tradelog__td.tradelog__name-label
+              = trade.sender.name
+          %td.tradelog__td
+            .trade__log-amount
+              - if sender?(trade)
+                .tradelog__symbol.-minus
+                  ー
+              - else
+                .tradelog__symbol.-plus
+                  ＋
+              .tradelog__amount-label
+                = "¥ #{trade.amount}"
           %td.tradelog__td.tradelog__date-label
             = trade.created_at.strftime("%Y/%m/%d %H:%M")
