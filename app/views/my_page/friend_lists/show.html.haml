@@ -1,3 +1,4 @@
-%div{ data: { controller: "my-page--friend-list" } }
+.serarch__field{ data: { controller: "my-page--friend-list" } }
   %input{ placeholder: "名前を入力", data: { target: "my-page--friend-list.keyword" } }
   %input{ value: "検索", type: :button, data: { action: "click->my-page--friend-list#search" } }
+  .search__result{ data: { target: "my-page--friend-list.result" } }

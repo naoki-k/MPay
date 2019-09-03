@@ -1,10 +1,9 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "keyword" ]
+  static targets = [ "keyword", "result" ]
 
   search() {
-    console.log(this.keywordTarget)
     const data = new FormData();
     data.append("keyword", this.keywordTarget.value)
     const request = new Request("/user_search", {
@@ -12,8 +11,15 @@ export default class extends Controller {
       body: data
     })
 
-    fetch(request).then((response => {
-      console.log(response)
-    }))
+    fetch(request).then((response) => {
+      return response.json()
+    }).then((data) => {
+      this.resultTarget.innerHTML = ""
+      data.forEach((user) => {
+        this.resultTarget.innerHTML += "<div>" + user[1] + "</div>"
+      })
+    }).catch(() => {
+      this.resultTarget.innerHTML = "<div>not found</div>"
+    })
   }
 }
