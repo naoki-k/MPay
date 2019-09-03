@@ -5,6 +5,9 @@ class MyPage::FriendListsController < ApplicationController
   before_action :require_sign_in
 
   def show
+    @friends = current_user.friends
+    @followings = current_user.following
+    @followers = current_user.followers
   end
 
   def search
