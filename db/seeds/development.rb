@@ -7,7 +7,7 @@ admin_user = AdminUser.create!({
   email: "admin1@example.com"
 })
 admin_user.credit_payment.update_attribute(:is_active, true)
-admin_user.update_attribute(:activated, true)
+admin_user.account_activation.update_attribute(:activated, true)
 
 test_user_1 = PersonalUser.create!({
   tel: Faker::PhoneNumber.unique.cell_phone,
@@ -26,7 +26,7 @@ test_user_2 = PersonalUser.create!({
 [test_user_1, test_user_2].each_with_index do |user, i|
   user.credit_payment.update_attribute(:is_active, true)
   user.update_attribute(:code, i)
-  user.update_attribute(:activated, true)
+  user.account_activation.update_attribute(:activated, true)
   Trade.create!({
     active_payment: admin_user.credit_payment,
     passive_payment: user.credit_payment,
@@ -40,7 +40,7 @@ corporate_user_1 = CorporateUser.create!({
   password: "password",
   email: "corporate1@example.com"
 })
-corporate_user_1.update_attribute(:activated, true)
+corporate_user_1.account_activation.update_attribute(:activated, true)
 corporate_user_1.credit_payment.update_attribute(:is_active, true)
 
 # ---------------
