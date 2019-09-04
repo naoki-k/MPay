@@ -1,24 +1,33 @@
 .tradelog
   %h1.tradelog__title 取引履歴
-  %table.trade__table
-    %tbody.tradelog__items
+  .trade__table
+    .tradelog__items
       - @trades&.each do |trade|
-        %tr.tradelog__item-container
+        .tradelog__item-container
           - if receiver?(trade)
-            %td.tradelog__td.tradelog__name-label
-              = trade.sender.name
+            - if trade.sender.type == "AdminUser"
+              .tradelog__name-label MPay
+            -else
+              .tradelog__name-label
+                = trade.sender.name
           - else
-            %td.tradelog__td.tradelog__name-label
-              = trade.receiver.name
-          %td.tradelog__td
-            .trade__log-amount
-              - if receiver?(trade)
-                .tradelog__symbol.-plus
-                  ＋
-              - else
-                .tradelog__symbol.-minus
-                  ー
-              .tradelog__amount-label
-                = "¥ #{trade.amount}"
-          %td.tradelog__td.tradelog__date-label
+            - if trade.sender.type == "AdminUser"
+              .tradelog__name-label MPay
+            - else
+              .tradelog__name-label
+                = trade.receiver.name
+
+          .trade__log-amount
+            - if receiver?(trade)
+              .tradelog__symbol.-plus
+                ＋
+            - else
+              .tradelog__symbol.-minus
+                ー
+            .tradelog__amount-label
+              = "¥ #{trade.amount}"
+          .trade__type-container
+            %span{ class: "trade__type trade__#{trade.type}"}
+              = trade.type_ja
+          .tradelog__date-label
             = trade.created_at.strftime("%Y/%m/%d %H:%M")

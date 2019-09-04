@@ -27,10 +27,10 @@ class Trade < ApplicationRecord
 
   def type_ja
     case type
-    when :charge then "入金"
-    when :from_mpay then "MPayからの支払い"
-    when :to_corporate then "法人への支払い"
-    when :with_personal_user then "ユーザー間取引"
+    when :charge then "チャージ"
+    when :from_mpay then "特典"
+    when :to_corporate then "支払い"
+    when :with_personal_user then "送金"
     end
   end
 
