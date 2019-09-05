@@ -34,6 +34,10 @@ class Trade < ApplicationRecord
     end
   end
 
+  def received?(user)
+    self.receiver.name == user.name
+  end
+
   private
 
     def tradable

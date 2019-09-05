@@ -4,7 +4,7 @@
     .tradelog__items
       - @trades&.each do |trade|
         .tradelog__item-container
-          - if receiver?(trade)
+          - if trade.received?(current_user)
             - if trade.sender.type == "AdminUser"
               .tradelog__name-label MPay
             -else
@@ -18,7 +18,7 @@
                 = trade.receiver.name
 
           .trade__log-amount
-            - if receiver?(trade)
+            - if trade.received?(current_user)
               .tradelog__symbol.-plus
                 ＋
             - else
