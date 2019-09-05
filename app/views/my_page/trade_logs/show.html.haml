@@ -5,17 +5,11 @@
       - @trades&.each do |trade|
         .tradelog__item-container
           - if trade.received?(current_user)
-            - if trade.sender.type == "AdminUser"
-              .tradelog__name-label MPay
-            -else
-              .tradelog__name-label
-                = trade.sender.name
+            .tradelog__name-label
+              = change_sender_name_from_admin(trade)
           - else
-            - if trade.sender.type == "AdminUser"
-              .tradelog__name-label MPay
-            - else
-              .tradelog__name-label
-                = trade.receiver.name
+            .tradelog__name-label
+              = trade.receiver.name
 
           .trade__log-amount
             - if trade.received?(current_user)

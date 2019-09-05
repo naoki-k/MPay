@@ -1,5 +1,5 @@
 module MyPage::TradeLogsHelper
-  # def receiver?(trade)
-  #   current_user.name == trade.receiver.name
-  # end
+  def change_sender_name_from_admin(trade)
+    trade.sender.type == "AdminUser" ? "MPay" : trade.sender.name
+  end
 end
