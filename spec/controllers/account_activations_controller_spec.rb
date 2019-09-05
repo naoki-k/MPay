@@ -7,7 +7,7 @@ RSpec.describe AccountActivationsController, type: :controller do
     let(:token) { "test_token" }
 
     context "when correct link" do
-      before { user.update_attribute(:activation_digest, BCrypt::Password.create(token)) }
+      before { user.account_activation.update_attribute(:digest, BCrypt::Password.create(token)) }
 
       it :aggregate_failures do
         expect {
@@ -19,7 +19,7 @@ RSpec.describe AccountActivationsController, type: :controller do
     end
 
     context "when email is invalid" do
-      before { user.update_attribute(:activation_digest, BCrypt::Password.create(token)) }
+      before { user.account_activation.update_attribute(:digest, BCrypt::Password.create(token)) }
 
       it :aggregate_failures do
         expect {
@@ -79,7 +79,7 @@ RSpec.describe AccountActivationsController, type: :controller do
       end
   
       context "when user already authorized" do
-        before { user.update_attribute(:activated, true) }
+        before { user.account_activation.update_attribute(:activated, true) }
   
         it :aggregate_failures do
           expect {
