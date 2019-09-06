@@ -1,0 +1,5 @@
+.alia {
+  &[aria-disabled="true"] {
+    display: none;
+  }
+}

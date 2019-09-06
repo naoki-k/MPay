@@ -1,26 +1,26 @@
-%div{ data: { controller: "my-page--friend-list" } }
+%div{ data: { controller: "my-page--friend-search my-page--friend-list" } }
   .serarch__field
-    %input{ placeholder: "名前を入力", data: { target: "my-page--friend-list.keyword" } }
-    %input{ value: "検索", type: :button, data: { action: "click->my-page--friend-list#search" } }
-    .search__result{ data: { target: "my-page--friend-list.result" } }
+    %input{ placeholder: "名前を入力", data: { target: "my-page--friend-search.keyword" } }
+    %input{ value: "検索", type: :button, data: { action: "click->my-page--friend-search#search" } }
+    .alia{ data: { target: "my-page--friend-search.result" }, "aria-disabled": "true" }
   .tabs
-    %span{ data: { action: "click->my-page--friend-list#show" } }友達一覧
-    %span{ data: { action: "click->my-page--friend-list#show" } }友達リクエスト
-    %span{ data: { action: "click->my-page--friend-list#show" } }承認待ちユーザー
+    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }友達一覧
+    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }友達リクエスト
+    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }承認待ちユーザー
   .contents
-    %div{ data: { target: "click->my-page--friend-list.content" } }
+    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "false" } }
       - if @friends.present?
         - @friends.each do |user|
           %div= user.name
       - else
         %div 友達がいません
-    %div{ data: { target: "click->my-page--friend-list.content" } }
+    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "true" } }
       - if @followings.present?
         - @followings.each do |user|
           %div= user.name
       - else
         %div 友達リクエストを送ってみましょう！
-    %div{ data: { target: "click->my-page--friend-list.content" } }
+    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "true" } }
       - if @followers.present?
         - @followers.each do |user|
           %div= user.name
