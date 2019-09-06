@@ -1,0 +1,88 @@
+@import "shared/colors";
+
+.tradelog {
+  width: 700px;
+  margin: 0 auto;
+
+  .tradelog__title{
+    border-bottom: 3px solid $gold;
+    margin-bottom: 10px;
+  }
+
+  .tradelog__items {
+    width: 650px;
+    padding: 0 25px;
+  }
+
+  .tradelog__item-container{
+    display: block;
+    margin: 5px 0 20px;
+    border-bottom: 1px solid $gold-3S;
+  }
+
+  .tradelog__name-label {
+    display: inline-block;
+    margin-right: 30px;
+  }
+
+  .trade__log-amount {
+    display: flex;
+  }
+
+  .tradelog__symbol {
+    padding: 5px 10px;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: middle;
+    font-weight: bold;
+
+    &.-plus {
+      color: $pink;
+    }
+
+    &.-minus {
+      color: $blue;
+    }
+  }
+
+  .tradelog__amount-label {
+    font-size: 30px;
+  }
+
+  .trade__type-container {
+    text-align: right;
+    margin-top: -40px;
+  }
+
+  .trade__type {
+    display: inline-block;
+    width: 90px;
+    height: 23px;
+    color: $white;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .trade__charge {
+    background-color: $pink-2S
+  }
+
+  .trade__from_mpay {
+    background-color: $orange-2S;
+  }
+
+  .trade__to_corporate {
+    background-color: $green-2S;
+  }
+
+  .trade__with_personal_user {
+    background-color: $blue-2S;
+  }
+
+  .tradelog__date-label {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: $navy-1S;
+  }
+}
