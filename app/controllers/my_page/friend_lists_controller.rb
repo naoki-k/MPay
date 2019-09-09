@@ -14,7 +14,7 @@ class MyPage::FriendListsController < ApplicationController
     if params[:keyword].present?
       @users = User.where('name LIKE ?', "%#{ActiveRecord::Base.send(:sanitize_sql_like, params[:keyword])}%")
       respond_to do |format|
-        format.json { render json: @users.pluck(:code, :name) }
+        format.json { render json: @users.pluck(:id, :code, :name) }
       end
     end
   end

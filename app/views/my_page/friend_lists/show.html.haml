@@ -1,3 +1,4 @@
+%div{ class: "flash-container" }
 %div{ data: { controller: "my-page--friend-search my-page--friend-list" } }
   .serarch__field
     %input{ placeholder: "名前を入力", data: { target: "my-page--friend-search.keyword" } }
@@ -23,6 +24,8 @@
     .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "true" } }
       - if @followers.present?
         - @followers.each do |user|
-          %div= user.name
+          %div{ data: { controller: "relationships", relationships: { id: user.id } } }
+            = link_to user.name, user_path(user)
+            %input{ type: :button, data: { action: "click->relationships#follow" } }
       - else
         %div 友達リクエストはありません

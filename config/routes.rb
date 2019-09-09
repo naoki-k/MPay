@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   # 取引
   resource :trade, only: [:new, :create]
   post "trade/confirmation", to: "trades#confirmation", as: "trade_confirmation"
+
+  # フレンド
+  resources :relationships, only: :destroy
+  post "relationships/:id", to: "relationships#create", as: "relationships"
 end

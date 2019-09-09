@@ -35,7 +35,7 @@ class Trade < ApplicationRecord
   end
 
   def received?(user)
-    self.receiver == user
+    receiver == user
   end
 
   private

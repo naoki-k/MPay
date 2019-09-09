@@ -20,7 +20,11 @@ export default class extends Controller {
     }).then((data) => {
       this.resultTarget.innerHTML = ""
       data.forEach((user) => {
-        this.resultTarget.innerHTML += "<div>" + user[1] + "</div>"
+        this.resultTarget.innerHTML += `
+        <div>
+          <a href="/users/${user[0]}"> ${user[2]} </a>
+        <div>
+        `
       })
     }).catch(() => {
       this.resultTarget.innerHTML = "<div>not found</div>"

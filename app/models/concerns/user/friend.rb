@@ -18,6 +18,6 @@ module User::Friend
   end
 
   def friends
-    following && followers
+    following & followers
   end
 end
