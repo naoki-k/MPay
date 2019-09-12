@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Clipboard from 'javascript/controllers/clipboard_controller'
+import Clipboard from 'javascript/clipboard/controllers/clipboard_controller'
 
 describe('ClipboardController', () => {
 

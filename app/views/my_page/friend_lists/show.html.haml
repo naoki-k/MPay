@@ -1,31 +1,33 @@
 %div{ class: "flash-container" }
-%div{ data: { controller: "my-page--friend-search my-page--friend-list" } }
+%div{ data: { controller: "friend-search friend-list" } }
   .serarch__field
-    %input{ placeholder: "名前を入力", data: { target: "my-page--friend-search.keyword" } }
-    %input{ value: "検索", type: :button, data: { action: "click->my-page--friend-search#search" } }
-    .alia{ data: { target: "my-page--friend-search.result" }, "aria-disabled": "true" }
+    %input{ placeholder: "名前を入力", data: { target: "friend-search.keyword" } }
+    %input{ value: "検索", type: :button, data: { action: "click->friend-search#search" } }
+    .alia{ data: { target: "friend-search.result" }, "aria-disabled": "true" }
   .tabs
-    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }友達一覧
-    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }友達リクエスト
-    %span{ data: { action: "click->my-page--friend-search#slide", target: "my-page--friend-search.tab" } }承認待ちユーザー
+    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }友達一覧
+    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }友達リクエスト
+    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }承認待ちユーザー
   .contents
-    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "false" } }
+    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "false" } }
       - if @friends.present?
         - @friends.each do |user|
-          %div= user.name
+          %div
+            = link_to user.name, user_path(user)
       - else
         %div 友達がいません
-    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "true" } }
+    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "true" } }
       - if @followings.present?
         - @followings.each do |user|
-          %div= user.name
+          %div
+            = link_to user.name, user_path(user)
       - else
         %div 友達リクエストを送ってみましょう！
-    .alia{ data: { target: "my-page--friend-search.content" }, aria: { disabled: "true" } }
+    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "true" } }
       - if @followers.present?
         - @followers.each do |user|
           %div{ data: { controller: "relationships", relationships: { id: user.id } } }
             = link_to user.name, user_path(user)
-            %input{ type: :button, data: { action: "click->relationships#follow" } }
+            %input{ type: :button, data: { action: "click->relationships#follow" }, value: "承認する" }
       - else
         %div 友達リクエストはありません
