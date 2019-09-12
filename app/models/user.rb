@@ -16,8 +16,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: :Relationship,
                                    foreign_key: :followed_id,
                                    dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships
+  has_many :active_relation_users, through: :active_relationships, source: :followed
+  has_many :passive_relation_users, through: :passive_relationships, source: :follower
   has_many :active_billings, class_name: :Billing,
                               foreign_key: :sender_id,
                               dependent: :destroy

@@ -6,7 +6,7 @@ class MyPage::FriendListsController < ApplicationController
 
   def show
     @friends = current_user.friends
-    @followings = current_user.following
+    @followings = current_user.followings
     @followers = current_user.followers
   end
 
