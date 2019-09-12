@@ -21,6 +21,7 @@
         - @followings.each do |user|
           %div
             = link_to user.name, user_path(user)
+            %input{ type: :button, data: { action: "click->relationships#unfollow" }, value: "フォローを取り消す" }
       - else
         %div 友達リクエストを送ってみましょう！
     .alia{ data: { target: "tab-layout.content" }, aria: { disabled: "true" } }
@@ -28,6 +29,6 @@
         - @followers.each do |user|
           %div{ data: { controller: "relationships", relationships: { id: user.id } } }
             = link_to user.name, user_path(user)
-            %input{ type: :button, data: { action: "click->relationships#follow" }, value: "承認する" }
+            %input{ type: :button, data: { action: "click->relationships#follow" }, value: "フォローする" }
       - else
         %div 友達リクエストはありません

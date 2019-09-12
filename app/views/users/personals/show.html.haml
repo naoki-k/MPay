@@ -1,3 +1,4 @@
+%div{ class: "flash-container" }
 - if @user
   %div
     名前:
@@ -9,3 +10,12 @@
     ユーザーコード:
     %input{ value: @user.code, data: { target: "clipboard.source" }, readonly: true }
     = button_tag "copy", type: :button, data: { action: "clipboard#copy" }
+  %div{ data: { controller: "relationships", relationships: { id: @user.id } } }
+    - if current_user.friend?(@user)
+      %span 友達
+      %input{ type: :button, data: { action: "click->relationships#unfollow" }, value: "フォローを取り消す" }
+    - elsif current_user.following?(@user)
+      %span フォロー中
+      %input{ type: :button, data: { action: "click->relationships#unfollow" }, value: "フォローを取り消す" }
+    - else
+      %input{ type: :button, data: { action: "click->relationships#follow" }, value: "フォローする" }
