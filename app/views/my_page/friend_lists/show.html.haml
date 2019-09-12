@@ -1,29 +1,29 @@
 %div{ class: "flash-container" }
-%div{ data: { controller: "friend-search friend-list" } }
+%div{ data: { controller: "friend-search tab-layout" } }
   .serarch__field
     %input{ placeholder: "名前を入力", data: { target: "friend-search.keyword" } }
-    %input{ value: "検索", type: :button, data: { action: "click->friend-search#search" } }
+    %input{ value: "検索", type: :button, data: { action: "click->friend-search#search click->tab-layout#close" } }
     .alia{ data: { target: "friend-search.result" }, "aria-disabled": "true" }
   .tabs
-    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }友達一覧
-    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }友達リクエスト
-    %span{ data: { action: "click->friend-search#slide", target: "friend-search.tab" } }承認待ちユーザー
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }友達一覧
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }友達リクエスト
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }承認待ちユーザー
   .contents
-    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "false" } }
+    .alia{ data: { target: "tab-layout.content" }, aria: { disabled: "false" } }
       - if @friends.present?
         - @friends.each do |user|
           %div
             = link_to user.name, user_path(user)
       - else
         %div 友達がいません
-    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "true" } }
+    .alia{ data: { target: "tab-layout.content" }, aria: { disabled: "true" } }
       - if @followings.present?
         - @followings.each do |user|
           %div
             = link_to user.name, user_path(user)
       - else
         %div 友達リクエストを送ってみましょう！
-    .alia{ data: { target: "friend-search.content" }, aria: { disabled: "true" } }
+    .alia{ data: { target: "tab-layout.content" }, aria: { disabled: "true" } }
       - if @followers.present?
         - @followers.each do |user|
           %div{ data: { controller: "relationships", relationships: { id: user.id } } }

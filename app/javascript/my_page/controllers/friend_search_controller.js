@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "keyword", "result", "tab", "content" ]
+  static targets = [ "keyword", "result" ]
 
   search() {
     const data = new FormData();
@@ -13,9 +13,6 @@ export default class extends Controller {
 
     fetch(request).then((response) => {
       this.resultTarget.setAttribute("aria-disabled", false)
-      this.contentTargets.forEach((element) => {
-        element.setAttribute('aria-disabled', true)
-      })
       return response.json()
     }).then((data) => {
       this.resultTarget.innerHTML = ""
@@ -31,11 +28,7 @@ export default class extends Controller {
     })
   }
 
-  slide(event) {
+  close() {
     this.resultTarget.setAttribute('aria-disabled', true)
-    const index = this.tabTargets.indexOf(event.currentTarget)
-    this.contentTargets.forEach((element, i) => {
-      element.setAttribute('aria-disabled', i !== index)
-    })
   }
 }
