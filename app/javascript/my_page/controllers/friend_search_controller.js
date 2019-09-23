@@ -1,34 +1,28 @@
+import SearchedUser from "../models/searched_user"
+
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "keyword", "result" ]
+  static targets = [ "keyword", "container" ]
 
-  search() {
+  async search() {
     const data = new FormData();
     data.append("keyword", this.keywordTarget.value)
-    const request = new Request("/user_search", {
+    const request = new Request("/api/user-search", {
       method: "POST",
       body: data
     })
 
-    fetch(request).then((response) => {
-      this.resultTarget.setAttribute("aria-disabled", false)
-      return response.json()
-    }).then((data) => {
-      this.resultTarget.innerHTML = ""
-      data.forEach((user) => {
-        this.resultTarget.innerHTML += `
-        <div>
-          <a href="/users/${user[0]}"> ${user[2]} </a>
-        <div>
-        `
-      })
-    }).catch(() => {
-      this.resultTarget.innerHTML = "<div>not found</div>"
+    const response = await fetch(request)
+    const users = await response.json()
+    this.containerTarget.setAttribute("aria-disabled", false)
+    users.forEach(user => {
+      const searched_user = new SearchedUser(user.id, user.name)
+      this.containerTarget.innerHTML += searched_user.html
     })
   }
 
   close() {
-    this.resultTarget.setAttribute('aria-disabled', true)
+    this.containerTarget.setAttribute('aria-disabled', true)
   }
 }

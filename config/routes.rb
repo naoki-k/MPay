@@ -16,7 +16,10 @@ Rails.application.routes.draw do
     end
   end
 
-  post "user_search", to: "my_page/friend_lists#search", defaults: { format: :json }
+  post "api/user-search", to: "my_page/friend_lists#search", defaults: { format: :json }
+  get "api/friends", to: "my_page/friend_lists#friends", defaults: { format: :json }
+  get "api/followers", to: "my_page/friend_lists#followers", defaults: { format: :json }
+  get "api/followings", to: "my_page/friend_lists#followings", defaults: { format: :json }
 
   # ログイン、ログアウト
   resources :sessions, only: :create
