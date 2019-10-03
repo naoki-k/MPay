@@ -117,10 +117,12 @@ Trade.create!({
     password: "password",
     email: Faker::Internet.unique.email
   })
-  PersonalUser.create!({
+  user = PersonalUser.create!({
     tel: Faker::PhoneNumber.unique.cell_phone,
     name: Faker::Name.unique.name,
     password: "password",
     email: Faker::Internet.unique.email
   })
+
+  user.follow(test_user_1)
 end

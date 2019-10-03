@@ -12,8 +12,14 @@ Rails.application.routes.draw do
   resource :my_page, only: :show do
     scope module: :my_page do
       resource :trade_log, only: [:show]
+      resource :friend_list, only: [:show]
     end
   end
+
+  post "api/user-search", to: "my_page/friend_lists#search", defaults: { format: :json }
+  get "api/friends", to: "my_page/friend_lists#friends", defaults: { format: :json }
+  get "api/followers", to: "my_page/friend_lists#followers", defaults: { format: :json }
+  get "api/followings", to: "my_page/friend_lists#followings", defaults: { format: :json }
 
   # ログイン、ログアウト
   resources :sessions, only: :create
@@ -27,4 +33,8 @@ Rails.application.routes.draw do
   # 取引
   resource :trade, only: [:new, :create]
   post "trade/confirmation", to: "trades#confirmation", as: "trade_confirmation"
+
+  # フレンド
+  resources :relationships, only: :destroy
+  post "relationships/:id", to: "relationships#create", as: "relationships"
 end

@@ -137,6 +137,6 @@ RSpec.describe UsersController, type: :controller do
       other_user.follow(user)
     end
 
-    it { expect(user.friends).to include other_user }
+    it { expect(user.reload.friends).to include other_user }
   end
 end

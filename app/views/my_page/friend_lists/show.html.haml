@@ -1,0 +1,14 @@
+%div{ class: "flash-container" }
+%div{ data: { controller: "friend-search tab-layout" } }
+  .serarch__field
+    %input{ placeholder: "名前を入力", data: { target: "friend-search.keyword" } }
+    %input{ value: "検索", type: :button, data: { action: "click->friend-search#search click->tab-layout#close" } }
+    %ul.alia{ data: { target: "friend-search.container" }, "aria-disabled": "true" }
+  .tabs
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }友達一覧
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }友達リクエスト
+    %span{ data: { action: "click->friend-search#close click->tab-layout#switch", target: "tab-layout.tab" } }承認待ちユーザー
+  .contents{ data: { controller: "relationships", target: "relationships.container" } }
+    %ul.alia{ data: { controller: "friends", target: "tab-layout.content friends.container relationships.friends" }, aria: { disabled: "false" } }
+    %ul.alia{ data: { controller: "followings", target: "tab-layout.content followings.container relationships.followings" }, aria: { disabled: "true" } }
+    %ul.alia{ data: { controller: "followers", target: "tab-layout.content followers.container relationships.followers" }, aria: { disabled: "true" } }

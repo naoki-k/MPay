@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(version: 2019_09_02_095205) do
     t.string "email", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
     t.string "code", limit: 25
     t.index ["code"], name: "index_users_on_code", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
