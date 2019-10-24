@@ -8,6 +8,7 @@ import FriendsController from '../my_page/controllers/friends_controller'
 import FollowersController from '../my_page/controllers/followers_controller'
 import FollowingsController from '../my_page/controllers/followings_controller'
 import TabLayoutController from '../tab_layout/controllers/tab_layout_controller'
+import FillAddressController from '../address/controllers/fill_address_controller'
 
 const application = Application.start()
 application.register('clipboard', ClipboardController)
@@ -18,4 +19,5 @@ application.register('friends', FriendsController)
 application.register('followers', FollowersController)
 application.register('followings', FollowingsController)
 application.register('tab-layout', TabLayoutController)
+application.register('fill-address', FillAddressController)
 Rails.start()
