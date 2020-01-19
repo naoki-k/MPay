@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "api/friends", to: "my_page/friend_lists#friends", defaults: { format: :json }
   get "api/followers", to: "my_page/friend_lists#followers", defaults: { format: :json }
   get "api/followings", to: "my_page/friend_lists#followings", defaults: { format: :json }
+  get "browsed_places", to: "browsed_places#index", default: { format: :json }
 
   # ログイン、ログアウト
   resources :sessions, only: :create

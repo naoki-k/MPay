@@ -1,4 +1,4 @@
-.tradelog
+.tradelog{ data: { controller: "fill-address" } }
   %h1.tradelog__title 取引履歴
   .trade__table
     .tradelog__items
@@ -25,3 +25,13 @@
               = trade.type_ja
           .tradelog__date-label
             = trade.created_at.strftime("%Y/%m/%d %H:%M")
+  %div
+    %input{ type: :text, data: { target: "fill-address.zipCode" } }
+    %label 郵便番号
+    %input{ type: :button, value: "自動補完",data: { action: "click->fill-address#fillIn" } }
+  %div
+    %input{ type: :text, data: { target: "fill-address.pref" } }
+    %label 県
+  %div
+    %input{ type: :text, data: { target: "fill-address.city" } }
+    %label 市区町村
